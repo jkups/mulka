@@ -1,0 +1,20 @@
+{
+  "ruby.useBundler": true,
+  "ruby.format": "standard",
+  "ruby.lint": {
+    "standard": {
+      "useBundler": true
+    }
+  },
+  "ruby.useLanguageServer": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "eslint.packageManager": "yarn",
+  "eslint.options": {
+    "configFile": ".eslintrc.json"
+  }
+}

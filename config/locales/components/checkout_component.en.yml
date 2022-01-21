@@ -1,0 +1,13 @@
+en:
+  checkout_component:
+    minimum_unit: "Min. Investment: %{unit} unit"
+    available_units: Available Units
+    review_message_html: You are about to secure <b>%{units} units</b> of <b>%{name}</b> at <b>%{unit_price}/unit</b>. This transaction will be associated with your <b>%{acc_name}</b> portfolio.
+    transaction_summary: Transaction Summary
+    units_to_acquire: Units to Acquire
+    subtotal: Subtotal
+    transaction_fee: Transaction Fee
+    grand_total: Grand Total
+    pay_with_paypal: Pay with Paypal
+    checkout: Checkout
+    acc_number: "Portfolio No: %{acc_number}"

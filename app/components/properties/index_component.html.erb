@@ -1,0 +1,42 @@
+<div>
+  <div class="w-96 h-full relative inline-block border border-gray-100 rounded-xl shadow-lg overflow-hidden">
+    <div class="absolute top-0 text-white bg-green-500 ml-6 px-2 py-1 pt-3">
+        <%= property.status %>
+    </div>
+
+    <%= thumbnail %>
+
+    <div class="p-6 relative h-80">
+      <div class="mb-12">
+        <div class="text-info mb-4">
+          <h3 class="text-2xl mb-2 font-bold"><%= property.name %></h3>
+          <p class="text-gray-500"><%= property.address %></p>
+        </div>
+      </div>
+
+      <div class="absolute bottom-6 inset-x-6">
+        <div class="flex justify-between border-b border-gray-200 py-3">
+          <div><%= t(".property_type") %></div>
+          <div class="font-semibold"><%= property_type %></div>
+        </div>
+
+        <div class="flex justify-between border-b border-gray-200 py-3">
+          <div><%= t(".unit_price") %></div>
+          <div>
+            <span class="font-semibold"><%= price_per_unit  %></span>
+            <span class="text-sm">/<%= t(".unit") %></span>
+          </div>
+        </div>
+
+        <div class="flex justify-between pt-3">
+          <div><%= t(".estimated_yield") %></div>
+          <div class="font-semibold">10%</div>
+        </div>
+      </div>
+    </div>
+
+    <%= link_to property_path(property), class:"flex items-center justify-center absolute inset-0 opacity-0 hover:opacity-100 hover:bg-gray-500 hover:bg-opacity-50" do  %>
+      <%= button_tag 'Quick View', class:"bg-green-500 text-white text-xl font-semibold px-6 py-2 rounded-full" %>
+    <% end %>
+  </div>
+</div>

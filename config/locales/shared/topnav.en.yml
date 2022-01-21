@@ -1,0 +1,6 @@
+en:
+  shared:
+    topnav:
+      properties: Properties
+      login: Login
+      logout: Logout

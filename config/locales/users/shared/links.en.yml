@@ -1,0 +1,6 @@
+en:
+  users:
+    shared:
+      links:
+        login_message: You already have a profile? Login here.
+        signup_message: You have not created a profile? Sign up.

@@ -1,0 +1,15 @@
+<div class="bg-gray-100">
+	<div class="text-center py-24 mb-10">
+		<h2 class="text-3xl font-bold"><%= t(".title") %></h2>
+		<p class="text-lg"><%= t(".byline") %></p>
+	</div>
+</div>
+
+<section class="max-w-screen-xl	mx-auto mb-28">
+  <div class="border-b border-gray-200 py-4 text-xl">
+    <%= @properties.size %> <%= t(".properties_listed") %>
+  </div>
+  <div class="my-8 flex justify-between">
+    <%= render Properties::IndexComponent.with_collection(@properties) %>
+  </div>
+</section>

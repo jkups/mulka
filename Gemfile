@@ -6,11 +6,14 @@ ruby "3.0.3"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
 
+gem "braintree", "~> 4.5"
 gem "devise", "~> 4.8"
 gem "view_component", "~> 2.47"
 gem "webpacker", "~> 5.4"
+gem "cloudinary", "~> 1.21"
 gem "dry-monads", "~> 1.4"
 gem "dry-transaction", "~> 0.13.3"
+gem "good_job", "~> 2.9"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -57,8 +60,8 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'dotenv-rails'
   gem "rspec-rails", "~> 5.0"
-  gem "dotenv-rails"
   gem "standard", "~> 1.5"
   gem "pry-rails", "~> 0.3.9"
   gem "faker", "~> 2.19"
@@ -85,6 +88,3 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-
-

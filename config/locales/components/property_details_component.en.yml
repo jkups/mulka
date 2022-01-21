@@ -1,0 +1,11 @@
+en:
+  property_details_component:
+    investment_status: Investment Status
+    property_type: Property Type
+    property_value: Property Value
+    minimum_investment: Minimum Investment
+    units_available: Units Available
+    estimated_yield: Estimate Yield
+    minimum_unit: "%{minimum_unit} unit share"
+    buy_units: Buy Units
+    unit_price: "%{unit_price} /unit"

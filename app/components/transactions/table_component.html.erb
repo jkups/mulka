@@ -1,0 +1,10 @@
+<ul class="flex bg-gray-200 p4 divide-x divide-gray-300 text-lg font-semibold">
+  <li class="p-4 w-1/5"></li>
+  <li class="p-4 w-1/5"><%= t(".property") %></li>
+  <li class="p-4 w-1/5"><%= t(".units") %></li>
+  <li class="p-4 w-1/5 text-right"><%= t(".value") %></li>
+  <li class="p-4 w-1/5 text-right"><%= t(".fees") %></li>
+</ul>
+<div class="mb-20">
+  <%= render Transactions::TableRowComponent.with_collection(prepared_transactions)%>
+</div>

@@ -1,0 +1,18 @@
+<header class="border-b border-gray-300">
+  <div class="max-w-screen-xl mx-auto">
+    <div class="py-4 flex justify-between">
+      <div class="text-xl font-bold text-green-500">
+        <%= link_to "Mulka", root_path %>
+      </div>
+      <ul class="flex text-lg">
+        <li class="mr-8"><%= link_to t(".properties"), properties_path %></li>
+        <% if user_signed_in? %>
+          <li class="mr-8"><%= link_to t(".portfolios"), portfolios_path %></li>
+          <li><%= link_to t(".logout"), destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to t(".login"), new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</header>

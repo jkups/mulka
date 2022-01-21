@@ -1,0 +1,5 @@
+<% if alert %>
+	<%= render Ui::FlashComponent.new(type: :alert, message: alert) %>
+<% elsif notice %>
+	<%= render Ui::FlashComponent.new(type: :notice, message: notice) %>
+<% end %>

@@ -1,0 +1,7 @@
+en:
+  portfolio_component:
+    acquired_properties_html: Acquired <div class='text-lg font-semibold text-green-500'>Properties</div>
+    units_acquired_html: No. of <div class='text-lg font-semibold text-green-500'>Units</div>
+    total_value_html: Total <div class='text-lg font-semibold text-green-500'>Property Value</div>
+    total_fee_html: Total <div class='text-lg font-semibold text-green-500'>Transaction Fee</div>
+    acc_number: "Account No: %{acc_number}"

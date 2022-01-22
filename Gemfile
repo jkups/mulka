@@ -14,6 +14,7 @@ gem "cloudinary", "~> 1.21"
 gem "dry-monads", "~> 1.4"
 gem "dry-transaction", "~> 0.13.3"
 gem "good_job", "~> 2.9"
+gem "faker", "~> 2.19"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -64,7 +65,6 @@ group :development, :test do
   gem "rspec-rails", "~> 5.0"
   gem "standard", "~> 1.5"
   gem "pry-rails", "~> 0.3.9"
-  gem "faker", "~> 2.19"
   gem "factory_bot_rails", "~> 6.2"
   gem "strong_migrations", "~> 0.7.9"
 end

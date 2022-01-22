@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users, class_name: "User"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :portfolios, only: %i[index]
+  resources :properties, only: %i[index show] do
+    authenticated :user do
+      resources :checkout, only: %i[new create]
+    end
+  end
+
+  unauthenticated do
+    match "/properties/*all", to: redirect("/users/sign_in"), via: :all
+  end
+
+  root to: redirect("/properties")
 end

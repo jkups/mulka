@@ -1,3 +1,9 @@
+Transaction.destroy_all
+PropertyFeature.destroy_all
+Property.destroy_all
+Account.destroy_all
+User.destroy_all
+
 PROPERTY_TYPE = ["Apartment", "Terrace", "House"].freeze
 PROPERTY_IMAGE = [
   "na8vluep3ak42mhnbnj1",

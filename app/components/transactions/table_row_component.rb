@@ -18,9 +18,8 @@ module Transactions
     def toggle_transactions_button
       content_tag(
         :span,
-        id: property_id,
-        class: "px-2 mr-4 cursor-pointer",
-        data: {action: "click->toggle-transactions#toggle"}
+        class: "px-2 mr-4 cursor-pointer transform",
+        data: {action: "click->toggle-transactions#toggle", id: property_id}
       ) { tag.i class: "fas fa-chevron-down text-base text-green-500" }
     end
 

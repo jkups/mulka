@@ -1,5 +1,7 @@
 module Transactions
   class EntriesComponent < ViewComponent::Base
+    DATE_FORMAT = "%d/%m/%Y".freeze
+
     with_collection_parameter :transaction_entry
 
     def initialize(transaction_entry:)
@@ -11,7 +13,7 @@ module Transactions
     attr_reader :transaction_entry
 
     def transaction_date
-      transaction_entry.created_at.strftime("%d/%m/%Y")
+      transaction_entry.created_at.strftime(DATE_FORMAT)
     end
 
     def transaction_number

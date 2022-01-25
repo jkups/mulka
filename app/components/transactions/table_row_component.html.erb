@@ -8,13 +8,13 @@
   <li class="p-4 w-1/5 text-right"><%= value_subtotal %></li>
   <li class="p-4 w-1/5 text-right"><%= fee_subtotal %></li>
 </ul>
-<div id="<%= property_id %>">
+<div data-id="<%= property_id %>" class="hidden">
   <ul class="flex bg-green-100 divide-x-2 divide-green-200">
-    <li class="p-4 w-1/5">Date</li>
-    <li class="p-4 w-1/5">Transaction #</li>
-    <li class="p-4 w-1/5">Units</li>
-    <li class="p-4 w-1/5 text-right">Value</li>
-    <li class="p-4 w-1/5 text-right">Fee</li>
+    <li class="p-4 w-1/5"><%= t(".date_column_heading") %></li>
+    <li class="p-4 w-1/5"><%= t(".transaction_column_heading") %></li>
+    <li class="p-4 w-1/5"><%= t(".units_column_heading") %></li>
+    <li class="p-4 w-1/5 text-right"><%= t(".value_column_heading") %></li>
+    <li class="p-4 w-1/5 text-right"><%= t(".fee_column_heading") %></li>
   </ul>
   <%= render Transactions::EntriesComponent.with_collection(prepared_transaction.entries) %>
 </div>

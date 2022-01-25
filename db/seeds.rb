@@ -53,7 +53,8 @@ p "user was successfully created"
       fee: value * 0.1,
       trxn_number: Faker::Number.number(digits: 6),
       property: property,
-      user: user
+      user: user,
+      status: Transaction.statuses.fetch(:confirmed)
     )
   end
 end

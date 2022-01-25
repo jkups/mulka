@@ -59,7 +59,8 @@
             <%= render Ui::PrimaryButtonComponent.new(
               title: t(".pay_with_paypal"),
               rounded: true,
-              full_width: true
+              full_width: true,
+              data: {paypal_client_target: "submitButton"}
             ) %>
           </div>
         </div>

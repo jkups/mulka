@@ -4,8 +4,9 @@ import braintree from "braintree-web";
 
 // Connects to data-controller="paypal-client"
 export default class extends Controller {
-  static targets = ["form"];
+  static targets = ["form", "submitButton"];
   declare formTarget: HTMLFormElement;
+  declare submitButtonTarget: HTMLButtonElement;
   declare paypal_sdk;
 
   static values = {
@@ -20,7 +21,7 @@ export default class extends Controller {
   declare braintreePrefixValue: string;
   declare trxnAmountValue: string;
 
-  initialize() {
+  initialize(): void {
     // load paypal checkout script
     loadPaypalScript({
       "client-id": this.paypalIdValue,
@@ -31,7 +32,11 @@ export default class extends Controller {
     });
   }
 
-  createBraintreeClient() {
+  connect(): void {
+    this.submitButtonTarget.disabled = true;
+  }
+
+  createBraintreeClient(): void {
     const clientInstance = braintree.client.create({
       authorization: this.braintreeAuthorizationValue,
     });
@@ -39,7 +44,7 @@ export default class extends Controller {
     this.createPaypalCheckout(clientInstance);
   }
 
-  createPaypalCheckout(clientInstance) {
+  createPaypalCheckout(clientInstance): void {
     // Create a paypal checkout component.
     const paypalCheckout = clientInstance.then((clientInstance) => {
       return braintree.paypalCheckout.create({ client: clientInstance });
@@ -48,7 +53,7 @@ export default class extends Controller {
     this.initPaypalCheckoutInstance(paypalCheckout);
   }
 
-  initPaypalCheckoutInstance(paypalCheckout) {
+  initPaypalCheckoutInstance(paypalCheckout): void {
     const paypalCheckoutInstance = paypalCheckout.then(
       (paypalCheckoutInstance) => {
         return paypalCheckoutInstance.loadPayPalSDK({
@@ -61,23 +66,25 @@ export default class extends Controller {
     this.renderPaypalButton(paypalCheckoutInstance);
   }
 
-  renderPaypalButton(paypalCheckoutInstance) {
-    paypalCheckoutInstance.then((paypalCheckoutInstance) => {
-      return this.paypal_sdk
-        .Buttons({
-          fundingSource: this.paypal_sdk.FUNDING.PAYPAL,
-          style: { color: "blue" },
-          createOrder: () => this.createOrder(paypalCheckoutInstance),
-          onApprove: (data, action) =>
-            this.publishPayload(paypalCheckoutInstance, data, action),
-          onCancel: (data) => this.orderIsCancelled(data),
-          onError: (err) => this.trxnFailed(err),
-        })
-        .render("#paypal-button");
-    });
+  renderPaypalButton(paypalCheckoutInstance): void {
+    paypalCheckoutInstance
+      .then((paypalCheckoutInstance) => {
+        return this.paypal_sdk
+          .Buttons({
+            fundingSource: this.paypal_sdk.FUNDING.PAYPAL,
+            style: { color: "blue" },
+            createOrder: () => this.createOrder(paypalCheckoutInstance),
+            onApprove: (data, action) =>
+              this.publishPayload(paypalCheckoutInstance, data, action),
+            onCancel: (data) => this.orderIsCancelled(data),
+            onError: (err) => this.trxnFailed(err),
+          })
+          .render("#paypal-button");
+      })
+      .then(() => (this.submitButtonTarget.disabled = false));
   }
 
-  createOrder(paypalCheckoutInstance) {
+  createOrder(paypalCheckoutInstance): any {
     return paypalCheckoutInstance.createPayment({
       flow: "checkout",
       amount: this.trxnAmountValue,
@@ -87,7 +94,7 @@ export default class extends Controller {
     });
   }
 
-  publishPayload(paypalCheckoutInstance, data, action) {
+  publishPayload(paypalCheckoutInstance, data, action): any {
     return paypalCheckoutInstance.tokenizePayment(data).then((payload) => {
       const nonce_input = document.createElement("input");
       nonce_input.type = "hidden";
@@ -99,11 +106,11 @@ export default class extends Controller {
     });
   }
 
-  orderIsCancelled(data) {
+  orderIsCancelled(data): void {
     console.log("PayPal payment cancelled");
   }
 
-  trxnFailed(error) {
+  trxnFailed(error): void {
     console.error("PayPal error", error);
   }
 }

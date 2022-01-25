@@ -10,7 +10,7 @@ module Calculator
         :total_portfolio_fee
 
       TrxnSummary = Struct.new(
-        :property_id, :property_name, :property_image, :unit_subtotal, :value_subtotal, :fee_subtotal, :transactions
+        :property_id, :property_name, :property_image, :unit_subtotal, :value_subtotal, :fee_subtotal, :entries
       )
 
       class << self

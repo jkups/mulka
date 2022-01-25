@@ -15,7 +15,7 @@ module Calculator
 
       class << self
         def group_by_property(transactions:, account:)
-          grouped_transactions = transactions.group_by(&:property_id)
+          grouped_transactions = transactions.order(created_at: :desc).group_by(&:property_id)
           portfolio_property_count = grouped_transactions.size
           calculate_totals = calculate_totals(transactions)
 

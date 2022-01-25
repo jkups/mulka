@@ -2,13 +2,16 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import FlashController from "./flash_controller.js"
-application.register("flash", FlashController)
+import FlashController from "./flash_controller.js";
+application.register("flash", FlashController);
 
-import PageReloadController from "./page_reload_controller.ts"
-application.register("page-reload", PageReloadController)
+import PageReloadController from "./page_reload_controller.ts";
+application.register("page-reload", PageReloadController);
 
-import PaypalClientController from "./paypal_client_controller.ts"
-application.register("paypal-client", PaypalClientController)
+import PaypalClientController from "./paypal_client_controller.ts";
+application.register("paypal-client", PaypalClientController);
+
+import ToggleTransactionsController from "./toggle_transactions_controller.ts";
+application.register("toggle-transactions", ToggleTransactionsController);

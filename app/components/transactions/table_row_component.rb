@@ -15,6 +15,15 @@ module Transactions
 
     attr_reader :prepared_transaction, :prepared_transaction_counter
 
+    def toggle_transactions_button
+      content_tag(
+        :span,
+        id: property_id,
+        class: "px-2 mr-4 cursor-pointer",
+        data: {action: "click->toggle-transactions#toggle"}
+      ) { tag.i class: "fas fa-chevron-down text-base text-green-500" }
+    end
+
     def property_thumbnail
       cl_image_tag(
         prepared_transaction.property_image,

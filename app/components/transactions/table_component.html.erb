@@ -5,6 +5,6 @@
   <li class="p-4 w-1/5 text-right"><%= t(".value") %></li>
   <li class="p-4 w-1/5 text-right"><%= t(".fees") %></li>
 </ul>
-<div class="mb-20">
+<div class="mb-20" data-controller="toogle-transactions">
   <%= render Transactions::TableRowComponent.with_collection(prepared_transactions)%>
 </div>

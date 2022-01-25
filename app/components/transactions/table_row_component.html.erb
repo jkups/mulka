@@ -1,7 +1,20 @@
 <ul class="flex text-xl items-center <%= row_color %>">
-  <li class="p-4 w-1/5"><%= property_thumbnail %></li>
+  <li class="flex items-center p-4 w-1/5">
+    <%= toggle_transactions_button %>
+    <%= property_thumbnail %>
+  </li>
   <li class="p-4 w-1/5 underline"><%= property_name %></li>
   <li class="p-4 w-1/5"><%= unit_subtotal %></li>
   <li class="p-4 w-1/5 text-right"><%= value_subtotal %></li>
   <li class="p-4 w-1/5 text-right"><%= fee_subtotal %></li>
 </ul>
+<div id="<%= property_id %>">
+  <ul class="flex bg-green-100 divide-x-2 divide-green-200">
+    <li class="p-4 w-1/5">Date</li>
+    <li class="p-4 w-1/5">Transaction #</li>
+    <li class="p-4 w-1/5">Units</li>
+    <li class="p-4 w-1/5 text-right">Value</li>
+    <li class="p-4 w-1/5 text-right">Fee</li>
+  </ul>
+  <%= render Transactions::EntriesComponent.with_collection(prepared_transaction.entries) %>
+</div>

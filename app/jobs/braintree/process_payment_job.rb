@@ -8,7 +8,7 @@ module Braintree
       result = client.pay_with_paypal(total_amount: total_amount)
 
       if result.present?
-        UseCases::Transactions::Update.call(transaction_id: transaction.id)
+        UseCases::Transactions::Update.call(transaction_id: transaction.id, pay_id: result.id)
       end
     end
   end

@@ -18,7 +18,9 @@ class CheckoutController < ApplicationController
 
     if result.success?
       flash[:notice] = "Transaction was successful."
-      redirect_to portfolios_path
+      redirect_path = url_for(action: :index, controller: :portfolios, transaction_id: result.value!.transaction.id, property_id: result.value!.transaction.property_id)
+
+      redirect_to redirect_path
     else
       flash[:alert] = "Something went wrong."
       redirect_to root_path #TODO: redirect after unsuccessful transaction

@@ -13,5 +13,5 @@ application.register("page-reload", PageReloadController);
 import PaypalClientController from "./paypal_client_controller.ts";
 application.register("paypal-client", PaypalClientController);
 
-import ToggleTransactionsController from "./toggle_transactions_controller.ts";
-application.register("toggle-transactions", ToggleTransactionsController);
+import TransactionsController from "./transactions_controller.ts";
+application.register("transactions", TransactionsController);

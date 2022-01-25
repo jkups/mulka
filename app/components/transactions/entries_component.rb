@@ -11,6 +11,9 @@ module Transactions
     private
 
     attr_reader :transaction_entry
+    def transaction_id
+      transaction_entry.id
+    end
 
     def transaction_date
       transaction_entry.created_at.strftime(DATE_FORMAT)

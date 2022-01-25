@@ -19,7 +19,7 @@ module Transactions
       content_tag(
         :span,
         class: "px-2 mr-4 cursor-pointer transform",
-        data: {action: "click->toggle-transactions#toggle", id: property_id}
+        data: {action: "click->transactions#toggleTrxnContainer", id: property_id}
       ) { tag.i class: "fas fa-chevron-down text-base text-green-500" }
     end
 

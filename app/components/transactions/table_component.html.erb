@@ -5,6 +5,6 @@
   <li class="p-4 w-1/5 text-right"><%= t(".value_column_heading") %></li>
   <li class="p-4 w-1/5 text-right"><%= t(".fees_column_heading") %></li>
 </ul>
-<div class="mb-20" data-controller="toggle-transactions">
+<div class="mb-20" data-controller="transactions">
   <%= render Transactions::TableRowComponent.with_collection(prepared_transactions)%>
 </div>

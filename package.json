@@ -5,10 +5,10 @@
     "@paypal/paypal-js": "^5.0.1",
     "@rails/ujs": "^7.0.1",
     "braintree-web": "^3.85.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "typescript": "^4.5.4"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "devDependencies": {
+    "typescript": "^4.5.4",
     "@rails/webpacker": "5.4.3",
     "@babel/plugin-transform-typescript": "^7.16.8",
     "@babel/preset-typescript": "^7.16.7",

@@ -1,24 +1,8 @@
-# README
+## Mulka: A Property Investment Platform
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Mulka](https://mulka.herokuapp.com/) is a platform that enable investors to own units of a property by acquiring units they can afford. This platform was originally built using the MEN (Mongo, Node, Express) stack (see [Bricalot](https://github.com/jkups/bricalot)) and this is an attempt to build the solution using a different stack. The platform is mobile ready and was built with the following tools.
 
-Things you may want to cover:
-
-- Ruby version
-
-- System dependencies
-
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+- Ruby on Rails v7
+- Tailwindcss
+- Braintree
+- Cloudinary

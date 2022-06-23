@@ -1,8 +1,12 @@
-Buyer.destroy_all
-BuyerApp::Tranzaction.destroy_all
-BuyerApp::Portfolio.destroy_all
-SellerApp::PropertyFeature.destroy_all
-SellerApp::Property.destroy_all
+Users::Buyer.destroy_all
+Tranzactions::Tranzaction.destroy_all
+Portfolios::Portfolio.destroy_all
+Properties::PropertyFeature.destroy_all
+Properties::Property.destroy_all
+Properties::SettledProperty.destroy_all
+Properties::PropertyRent.destroy_all
+Properties::PropertyExpense.destroy_all
+Properties::PropertyValuation.destroy_all
 
 PROPERTY_TYPE = ["Apartment", "Terrace", "House"].freeze
 PROPERTY_IMAGE = [
@@ -11,7 +15,7 @@ PROPERTY_IMAGE = [
   "gkjnuyskk7dctedu8odl"
 ]
 
-buyer = Buyer.create!(
+buyer = Users::Buyer.create!(
   full_name: "Jane Smith",
   preferred_name: "Jane",
   email: "jane@example.com",
@@ -20,7 +24,7 @@ buyer = Buyer.create!(
 )
 p "buyer was successfully created"
 
-organization = SellerApp::Organization.create!(
+organization = Organizations::Organization.create!(
   name: "Wulo",
   address: Faker::Address.full_address,
   suburb: Faker::Address.zip_code,
@@ -30,7 +34,7 @@ organization = SellerApp::Organization.create!(
 )
 p "organization was successfully created"
 
-portfolio = BuyerApp::Portfolio.create!(
+portfolio = Portfolios::Portfolio.create!(
   name: "Default",
   number: Faker::Number.number(digits: 8),
   buyer: buyer,
@@ -38,8 +42,8 @@ portfolio = BuyerApp::Portfolio.create!(
 )
 p "portfolio was sucessfully created"
 
-def generate_offer(property, total_units = 1000, status = Offer.statuses.fetch(:active))
-  Offer.create!(
+def generate_offer(property, total_units = 1000, status = Tranzactions::Offer.statuses.fetch(:active))
+  Tranzactions::Offer.create!(
     property: property,
     total_units: total_units,
     minimum_units: 1,
@@ -50,14 +54,14 @@ def generate_offer(property, total_units = 1000, status = Offer.statuses.fetch(:
 end
 
 def generate_external_reference
-  BuyerApp::ExternalReference.create(
+  Tranzactions::ExternalReference.create(
     referenceable_source: "paypal",
     referenceable_id: Faker::Number.number(digits: 8)
   )
 end
 
 def generate_property_features(property)
-  SellerApp::PropertyFeature.create!(
+  Properties::PropertyFeature.create!(
     property: property,
     bed: (1..4).to_a.sample,
     bath: (1..3).to_a.sample,
@@ -68,7 +72,7 @@ def generate_property_features(property)
 end
 
 3.times do |idx|
-  property = SellerApp::Property.create!(
+  property = Properties::Property.create!(
     pid: "PID" + (rand * 1000).round.to_s,
     name: Faker::Restaurant.name,
     address: Faker::Address.full_address,
@@ -79,7 +83,7 @@ end
     image: PROPERTY_IMAGE[idx],
     occupied: false,
     category: "Town House",
-    classification: SellerApp::Property.classifications.fetch(:newly_built),
+    classification: Properties::Property.classifications.fetch(:newly_built),
     organization: organization
   )
 
@@ -91,7 +95,7 @@ end
     units_to_acquire = Faker::Number.within(range: 1..10)
     amount = unit_price * units_to_acquire
 
-    BuyerApp::Tranzaction.create!(
+    Tranzactions::Tranzaction.create!(
       units: units_to_acquire,
       amount: amount,
       fee: amount * 0.1,
@@ -104,7 +108,7 @@ end
 
 p "properties, offers and tranzactions were successfully created"
 
-property_manager = PropertyManager.create!(
+property_manager = Properties::PropertyManager.create!(
   full_name: Faker::Name.name,
   mobile: Faker::PhoneNumber.phone_number,
   email: ["one@example.com", "two@example.com"].sample,
@@ -113,7 +117,7 @@ property_manager = PropertyManager.create!(
 
 p "property manager was successfully created"
 
-property_to_be_settled = SellerApp::Property.create!(
+property_to_be_settled = Properties::Property.create!(
   pid: "PID" + (rand * 1000).round.to_s,
   name: Faker::Restaurant.name,
   address: Faker::Address.full_address,
@@ -124,19 +128,19 @@ property_to_be_settled = SellerApp::Property.create!(
   image: "vyi5xafgrugdtuduswio",
   occupied: false,
   category: "House",
-  classification: SellerApp::Property.classifications.fetch(:newly_built),
+  classification: Properties::Property.classifications.fetch(:newly_built),
   organization: organization
 )
 
 generate_property_features(property_to_be_settled)
-offer = generate_offer(property_to_be_settled, 6, Offer.statuses.fetch(:sold_out))
+offer = generate_offer(property_to_be_settled, 6, Tranzactions::Offer.statuses.fetch(:sold_out))
 
 3.times do
   unit_price = offer.price / offer.total_units
   units_to_acquire = 2
   amount = unit_price * units_to_acquire
 
-  BuyerApp::Tranzaction.create!(
+  Tranzactions::Tranzaction.create!(
     units: units_to_acquire,
     amount: amount,
     fee: amount * 0.1,
@@ -146,21 +150,21 @@ offer = generate_offer(property_to_be_settled, 6, Offer.statuses.fetch(:sold_out
   )
 end
 
-settled_property = SettledProperty.create!(
+settled_property = Properties::SettledProperty.create!(
   property: property_to_be_settled,
   property_manager: property_manager,
   monthly_rent: 16972,
   lease_start_on: Date.today - 8.months,
   lease_end_on: Date.today + 4.months,
   lease_term: "Annual",
-  status: SettledProperty.statuses.fetch(:occupied)
+  status: Properties::SettledProperty.statuses.fetch(:occupied)
 )
 
 p "settled properties with corresponding offers and tranzactions were successfully created"
 
 12.downto(1) do |i|
   date = Date.today - (i * 6.months)
-  PropertyValuation.create!(
+  Properties::PropertyValuation.create!(
     settled_property: settled_property,
     date: date,
     estimate: [350000, 450000, 480000, 550000, 500000, 650000, 620000, 600000, 720000].sample
@@ -171,7 +175,7 @@ p "property valuation was successfully created"
 
 8.downto(1) do |i|
   date = Date.today - i.months
-  PropertyRent.create!(
+  Properties::PropertyRent.create!(
     settled_property: settled_property,
     date: date,
     description: "Rent for the month of #{date.month}.",
@@ -183,7 +187,7 @@ p "property rent was successfully created"
 
 3.downto(1) do |i|
   date = Date.today - i * 2.months
-  PropertyExpense.create!(
+  Properties::PropertyExpense.create!(
     settled_property: settled_property,
     date: date,
     description: Faker::Lorem.sentence,

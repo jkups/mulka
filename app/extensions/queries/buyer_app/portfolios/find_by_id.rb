@@ -10,7 +10,7 @@ module Queries
         end
 
         def query
-          Portfolio
+          ::Portfolios::Portfolio
             .where(buyer: buyer)
             .find_by!(id: portfolio_id)
         end

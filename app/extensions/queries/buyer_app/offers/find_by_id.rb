@@ -9,7 +9,7 @@ module Queries
         end
 
         def query
-          Offer
+          Tranzactions::Offer
             .includes(:property)
             .find_by!(id: offer_id)
         end

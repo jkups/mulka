@@ -14,7 +14,7 @@ module UseCases
         end
 
         def persist_portfolio(form)
-          portfolio = ::BuyerApp::Portfolio.new(
+          portfolio = ::Portfolios::Portfolio.new(
             name: form.name,
             number: form.number,
             buyer: form.buyer,

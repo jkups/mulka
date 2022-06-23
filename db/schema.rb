@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_21_073743) do
+ActiveRecord::Schema.define(version: 2022_06_23_080700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 2022_06_21_073743) do
     t.string "registration_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "portfolio_settled_properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "portfolio_id", null: false
+    t.uuid "settled_property_id", null: false
+    t.integer "units"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["portfolio_id"], name: "index_portfolio_settled_properties_on_portfolio_id"
+    t.index ["settled_property_id"], name: "index_portfolio_settled_properties_on_settled_property_id"
   end
 
   create_table "portfolios", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -241,6 +251,8 @@ ActiveRecord::Schema.define(version: 2022_06_21_073743) do
   add_foreign_key "expression_of_interests", "offers"
   add_foreign_key "offers", "properties"
   add_foreign_key "organization_contacts", "organizations"
+  add_foreign_key "portfolio_settled_properties", "portfolios"
+  add_foreign_key "portfolio_settled_properties", "settled_properties"
   add_foreign_key "portfolios", "buyers"
   add_foreign_key "properties", "organizations"
   add_foreign_key "property_expenses", "settled_properties"

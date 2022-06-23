@@ -27,7 +27,7 @@ module UseCases
         def build_external_reference(accumulator)
           form = accumulator.form
 
-          external_reference = ::BuyerApp::ExternalReference.new(
+          external_reference = ::Tranzactions::ExternalReference.new(
             referenceable_source: form.payment_method,
             referenceable_id: form.generate_tranzaction_reference
           )
@@ -38,7 +38,7 @@ module UseCases
         def build_tranzaction(accumulator)
           form = accumulator.form
 
-          tranzaction = ::BuyerApp::Tranzaction.new(
+          tranzaction = ::Tranzactions::Tranzaction.new(
             units: form.number_of_units,
             amount: form.tranzaction_subtotal,
             fee: form.tranzaction_fee,

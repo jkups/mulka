@@ -5,7 +5,7 @@ module Queries
         include QueryBase
 
         def query
-          Offer
+          Tranzactions::Offer
             .all
             .order(created_at: :asc)
             .includes(:property)

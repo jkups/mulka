@@ -1,0 +1,11 @@
+<section class="max-w-screen-xl mx-auto mt-10">
+  <div class="text-center py-24 mb-10">
+		<h2 class="text-3xl font-bold"><%= t(".heading") %></h2>
+		<p class="text-lg"><%= t(".failure_message") %></p>
+    <%= render Ui::PrimaryLinkButtonComponent.new(
+      title: t(".try_again_label"),
+      href: buyer_app_offer_path(@offer.id),
+      rounded: true
+    ) %>
+	</div>
+</section>

@@ -1,0 +1,8 @@
+en:
+  tranzactions:
+    table_row_component:
+      date_column_heading: Date
+      tranzaction_column_heading: "Transaction #"
+      units_column_heading: Units
+      amount_column_heading: Amount
+      fee_column_heading: Fees

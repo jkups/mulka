@@ -1,0 +1,7 @@
+en:
+  buyer_app:
+    tranzactions:
+      failure:
+        heading: Ooops! Something went wrong with your transaction.
+        failure_message: So sorry about this. Our team of tech experts are taking a look, but in the meantime please try again.
+        try_again_label: Try Again

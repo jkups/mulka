@@ -1,12 +1,13 @@
 class CheckoutComponent < ViewComponent::Base
-  def initialize(property:, account:)
-    @property = property
-    @account = account
+  delegate :render_svg, to: :helpers
+
+  def initialize(tranzaction:)
+    @tranzaction = tranzaction
   end
 
   private
 
-  attr_reader :property, :account
+  attr_reader :tranzaction
 
   def braintree_nonce_prefix
     ENV["BRAINTREE_NONCE_PREFIX"]
@@ -20,42 +21,42 @@ class CheckoutComponent < ViewComponent::Base
     ENV["BRAINTREE_CLIENT_AUTHORIZATION"]
   end
 
+  def active_portfolio
+    tranzaction.portfolio
+  end
+
   def refresh_path
-    new_property_checkout_path(property.property_id)
+    new_buyer_app_offer_tranzaction_path(offer_id: tranzaction.offer.id)
   end
 
   def price_per_unit
-    calc_price_per_unit = property.listing_price / property.total_units
+    calc_price_per_unit = tranzaction.price / tranzaction.total_units
     number_to_currency(calc_price_per_unit)
   end
 
   def units_available
-    number_with_delimiter(property.available_units)
+    number_with_delimiter(tranzaction.available_units)
   end
 
-  def transaction_subtotal
-    number_to_currency(property.transaction_subtotal)
+  def tranzaction_subtotal
+    number_to_currency(tranzaction.tranzaction_subtotal)
   end
 
-  def transaction_fee
-    number_to_currency(property.transaction_fee)
+  def tranzaction_fee
+    number_to_currency(tranzaction.tranzaction_fee)
   end
 
-  def transaction_grand_total
-    number_to_currency(property.transaction_grand_total)
+  def tranzaction_grand_total
+    number_to_currency(tranzaction.tranzaction_grand_total)
   end
 
   def minimum_unit_required
-    minimum_unit = property.number_of_units
+    minimum_unit = tranzaction.minimum_units
     t(".minimum_unit", unit: minimum_unit)
   end
 
   def property_image_path
-    cl_image_path(property.image)
-  end
-
-  def prevent_decimal_value
-    "this.value=(parseInt(this.value))"
+    cl_image_path(tranzaction.image)
   end
 
   def property_image_with_details
@@ -68,7 +69,7 @@ class CheckoutComponent < ViewComponent::Base
 
   def available_unit
     content_tag(:div, class: "absolute top-0 mx-8 px-4 pt-12 pb-4 bg-green-500 text-white rounded-b-xl shadow-lg") do
-      children = content_tag(:p, t(".avaliable_units"), class: "text-xs")
+      children = content_tag(:p, t(".available_units"), class: "text-xs")
       children << content_tag(:p, units_available, class: "text-2xl font-semibold")
     end
   end
@@ -82,14 +83,14 @@ class CheckoutComponent < ViewComponent::Base
 
   def property_name_and_yield_tag
     content_tag(:div) do
-      children = content_tag(:h3, property.name, class: "text-xl font-bold")
-      children << content_tag(:p, "Yield: 10%")
+      children = content_tag(:h3, tranzaction.name, class: "text-xl font-bold")
+      children << content_tag(:p, t(".estimated_yield", yield: 10))
     end
   end
 
   def property_price_and_min_investment_tag
-    content_tag(:div) do
-      children = content_tag(:h3, price_per_unit, class: "text-xl font-semibold")
+    content_tag(:div, class: "text-right") do
+      children = content_tag(:h3, t(".price_per_unit", price_per_unit: price_per_unit), class: "text-xl font-semibold")
       children << content_tag(:p, minimum_unit_required)
     end
   end

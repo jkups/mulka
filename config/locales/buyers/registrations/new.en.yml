@@ -1,0 +1,9 @@
+en:
+  buyers:
+    registrations:
+      new:
+        full_name: Full Name
+        email: Email Address
+        password: Password
+        signup: Signup
+        signup_heading: Create your account.

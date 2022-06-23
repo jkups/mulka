@@ -1,0 +1,9 @@
+en:
+  buyers:
+    shared:
+      links:
+        login: Log in
+        login_message: You already have a account?
+        signup: Sign up
+        signup_message: You don't have an account?
+        remember_login_message: You remember your login details?

@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Mulka</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_pack_tag "application" %>
-    <%= javascript_pack_tag "application" %>
-  </head>
-
+  <%= render partial: "shared/head" %>
   <body>
     <div>
-      <%= render partial: "shared/topnav" %>
       <%= render partial: "shared/flash" %>
       <%= yield %>
-      <%= render partial: "shared/footer" %>
     </div>
   </body>
 </html>

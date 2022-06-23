@@ -1,0 +1,43 @@
+<%= render Ui::ModalComponent.new(id: "card-payment") do %>
+  <div>
+    <div class="p-6">
+      <h2 class="text-2xl font-bold">Pay with Card</h2>
+      <P>We accept all major cards.</h2>
+    </div>
+    <div class="flex flex-col gap-y-4 p-6">
+      <div>
+        <label for="cardholder-name" class="form-label"><i class="fas fa-user"></i> Name on Card</label>
+        <div id="cardholder-name" class="form-input"></div>
+      </div>
+      <div>
+        <label for="card-number" class="form-label"><i class="far fa-credit-card"></i> Card Number</label>
+        <div id="card-number" class="form-input"></div>
+      </div>
+      <div>
+        <label for="expiration" class="form-label"><i class="far fa-calendar-alt"></i> Expiration Date</label>
+        <div id="expiration" class="form-input"></div>
+      </div>
+      <div class="mb-5">
+        <label for="cvv" class="form-label"><i class="fas fa-key"></i> CVV</label>
+        <div id="cvv" class="form-input"></div>
+      </div>
+      <div>
+        <%= render Ui::PrimaryButtonComponent.new(
+            title: t(".charge_my_card"),
+            rounded: true,
+            full_width: true,
+            data: {
+              card_payment_target: "payWithCardButton",
+              action: "card-payment#processPayment"
+            }
+          )
+        %>
+        <p
+          class="text-center mt-2 text-gray-500 cursor-pointer hover:underline"
+          data-action="click->toggle-modal#hide">
+            I will pay with Paypal
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>

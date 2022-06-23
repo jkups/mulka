@@ -9,7 +9,6 @@ export default class extends Controller {
   declare urlValue: string;
 
   refreshWithParams(): void {
-    console.log("am here");
     this.formTarget.setAttribute("method", "get");
     this.formTarget.setAttribute("action", this.urlValue);
     this.formTarget.firstChild.remove();

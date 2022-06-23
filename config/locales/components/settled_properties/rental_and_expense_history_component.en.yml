@@ -1,0 +1,7 @@
+en:
+  settled_properties:
+    rental_and_expense_history_component:
+      income_expense_history: Year To Date History Of %{subheading}
+      history: Rent and Expense
+      rent: Rent
+      expense: Expense

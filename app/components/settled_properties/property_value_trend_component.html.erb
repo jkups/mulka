@@ -1,0 +1,4 @@
+<div class="border border-gray-200 p-4 rounded-2xl mt-4">
+  <div class="text-sm"><%== t(".property_value_trend", subheading: content_tag(:div, t(".historical_trend"), class: "text-lg font-semibold text-green-500")) %></div>
+  <%= area_chart(series, options) %>
+</div>

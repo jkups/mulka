@@ -1,0 +1,5 @@
+en:
+  offers:
+    property_description_component:
+      description_heading: Property Description
+      physical_address: Physical Address

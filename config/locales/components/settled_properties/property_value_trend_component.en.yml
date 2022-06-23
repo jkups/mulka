@@ -1,0 +1,5 @@
+en:
+  settled_properties:
+    property_value_trend_component:
+      property_value_trend: Property Value %{subheading}
+      historical_trend: Historical Trend

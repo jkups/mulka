@@ -1,0 +1,10 @@
+<div
+  class="text-2xl font-semibold absolute inset-0 text-white bg-black bg-opacity-80 hidden items-center justify-center"
+  data-card-payment-target="processingPayment"
+  data-paypal-payment-target="processingPayment"
+>
+  <div class="flex flex-col items-center gap-y-2">
+    <%= render_svg("spinner", class: "icon-md animate-spin") %>
+    <p>Processing payment...</p>
+  </div>
+</div>

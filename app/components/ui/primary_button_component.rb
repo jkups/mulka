@@ -19,7 +19,7 @@ module Ui
       default_link_button_class = DEFAULT_LINK_BUTTON_CLASS.dup
       default_link_button_class << classes if classes.present?
       default_link_button_class << "w-full" if full_width.present?
-      default_link_button_class << "rounded-md" if rounded.present?
+      default_link_button_class << "rounded-full" if rounded.present?
       default_link_button_class.join(" ")
     end
   end

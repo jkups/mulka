@@ -1,16 +1,25 @@
 Rails.application.routes.draw do
-  devise_for :users, class_name: "User"
+  devise_for :buyers, controllers: {registrations: "buyers/registrations"}
+  devise_for :sellers
 
-  resources :portfolios, only: %i[index]
-  resources :properties, only: %i[index show] do
-    authenticated :user do
-      resources :checkout, only: %i[new create]
+  authenticated :buyer do
+    namespace :buyer_app do
+      root to: redirect("/buyer_app/portfolios")
+      resource :profiles, only: %i[show update]
+      resources :portfolios, only: %i[index] do
+        resources :properties, only: %i[show]
+      end
+      resources :offers, only: %i[index show] do
+        resources :tranzactions, only: %i[new create]
+        get "tranzactions/success", to: "tranzactions#success"
+        get "tranzactions/failure", to: "tranzactions#failure"
+      end
     end
   end
 
-  unauthenticated do
-    match "/properties/*all", to: redirect("/users/sign_in"), via: :all
+  unauthenticated :buyer do
+    match "/*all", to: redirect("/buyers/sign_in"), via: :all
   end
 
-  root to: redirect("/properties")
+  root to: redirect("/buyers/sign_in")
 end

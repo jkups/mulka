@@ -8,3 +8,6 @@ Rails.start();
 import "@fortawesome/fontawesome-free/css/all.css";
 import "stylesheets/application.scss";
 import "controllers";
+
+import ApexCharts from "apexcharts";
+window.ApexCharts = ApexCharts;

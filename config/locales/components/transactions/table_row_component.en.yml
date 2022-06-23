@@ -1,8 +1,0 @@
-en:
-  transactions:
-    table_row_component:
-      date_column_heading: Date
-      transaction_column_heading: "Transaction #"
-      units_column_heading: Units
-      value_column_heading: Value
-      fee_column_heading: Fees

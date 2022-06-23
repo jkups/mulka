@@ -1,0 +1,16 @@
+en:
+  buyer_app:
+    profiles:
+      show:
+        my_profile: My Profile
+        full_name: Full Name
+        preferred_name: Preferred Name (optional)
+        email: Email Address
+        mobile_number: Mobile Number
+        address: Address
+        suburb: Suburb
+        city: City
+        country: Country
+        update_profile: Update Profile
+        basic_information: Basic Information
+        address_information: Residential Address

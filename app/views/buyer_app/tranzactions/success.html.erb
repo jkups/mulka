@@ -1,0 +1,12 @@
+<section class="max-w-screen-xl mx-auto mt-10">
+  <div class="text-center py-24 mb-10">
+		<h2 class="text-3xl font-bold"><%= t(".heading") %></h2>
+		<p class="text-lg"><%= t(".congrats_message") %></p>
+    <%= render Ui::PrimaryLinkButtonComponent.new(
+      title: t(".portfolio_label"),
+      href: buyer_app_portfolios_path,
+      rounded: true
+    ) %>
+	</div>
+</section>
+

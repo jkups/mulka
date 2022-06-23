@@ -2,16 +2,37 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application";
+import { application } from "./application"
 
-import FlashController from "./flash_controller.js";
-application.register("flash", FlashController);
+import CardPaymentController from "./card_payment_controller.ts"
+application.register("card-payment", CardPaymentController)
 
-import PageReloadController from "./page_reload_controller.ts";
-application.register("page-reload", PageReloadController);
+import DropdownMenuController from "./dropdown_menu_controller.ts"
+application.register("dropdown-menu", DropdownMenuController)
 
-import PaypalClientController from "./paypal_client_controller.ts";
-application.register("paypal-client", PaypalClientController);
+import FlashController from "./flash_controller.js"
+application.register("flash", FlashController)
 
-import TransactionsController from "./transactions_controller.ts";
-application.register("transactions", TransactionsController);
+import NumberOfUnitsController from "./number_of_units_controller.ts"
+application.register("number-of-units", NumberOfUnitsController)
+
+import PageReloadController from "./page_reload_controller.ts"
+application.register("page-reload", PageReloadController)
+
+import PaypalPaymentController from "./paypal_payment_controller.ts"
+application.register("paypal-payment", PaypalPaymentController)
+
+import PortfolioController from "./portfolio_controller.ts"
+application.register("portfolio", PortfolioController)
+
+import TabController from "./tab_controller.ts"
+application.register("tab", TabController)
+
+import ToggleController from "./toggle_controller.ts"
+application.register("toggle", ToggleController)
+
+import ToggleModalController from "./toggle_modal_controller.ts"
+application.register("toggle-modal", ToggleModalController)
+
+import ToggleSwitchController from "./toggle_switch_controller.ts"
+application.register("toggle-switch", ToggleSwitchController)

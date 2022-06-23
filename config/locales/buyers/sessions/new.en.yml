@@ -1,0 +1,7 @@
+en:
+  buyers:
+    sessions:
+      new:
+        forgot_password: Forgot your password?
+        login: Log In
+        login_heading: Log into your account.

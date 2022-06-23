@@ -1,3 +1,24 @@
 .form-input {
-  @apply w-full h-10 px-4 mt-1 border border-green-500 ring-green-500 rounded-md focus:outline-none focus:ring-1;
+  @apply w-full h-10 text-xl mt-1 border-b border-green-500 ring-green-500 focus:outline-none;
+
+  &:disabled {
+    @apply bg-white border-gray-200;
+  }
+}
+
+.form-label {
+  @apply text-gray-500;
+}
+
+.form-errors {
+  @apply text-red-800 text-sm;
+}
+
+.field_with_errors {
+  label {
+    @apply text-red-800;
+  }
+  input {
+    @apply border-red-800;
+  }
 }

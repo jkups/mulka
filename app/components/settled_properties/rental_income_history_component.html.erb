@@ -1,0 +1,46 @@
+<div data-controller="tab" data-tab-active-background-color-value="bg-green-600" data-tab-active-text-color-value="text-white">
+  <div class="inline-flex gap-x-1 text-sm relative -bottom-5 z-50">
+    <div data-action="click->tab#toggle" data-tab-target="tab" data-id="1" class="px-1.5 rounded cursor-pointer bg-green-600 text-white"><i class="fas fa-chart-area"></i></div>
+    <div data-action="click->tab#toggle" data-tab-target="tab" data-id="2" class="px-1.5 rounded cursor-pointer"><i class="fas fa-list"></i></div>
+  </div>
+  <div data-id="page-1" data-tab-target="tabable">
+    <%= area_chart(series, options) %>
+  </div>
+  <div data-id="page-2" data-tab-target="tabable" class="mt-6 text-sm text-gray-600 hidden">
+    <ul class="flex bg-gray-100 divide-x-2 divide-gray-200 font-semibold text-black">
+      <li class="px-4 py-2 w-1/4"><%= t(".date_column_heading") %></li>
+      <li class="px-4 py-2 w-2/4"><%= t(".description_column_heading") %></li>
+      <li class="px-4 py-2 w-1/4 text-right"><%= t(".value_column_heading") %></li>
+    </ul>
+    <ul class="flex border-b border-gray-200 last:border-b-8 last:mb-4">
+      <li class="px-4 py-2 w-1/4">12/02/2023</li>
+      <li class="px-4 py-2 w-2/4">Rental income.</li>
+      <li class="px-4 py-2 w-1/4 text-right">$1,200.00</li>
+    </ul>
+    <ul class="flex bg-gray-50 border-b border-gray-200 last:border-b-8 last:mb-4">
+      <li class="px-4 py-2 w-1/4">12/02/2023</li>
+      <li class="px-4 py-2 w-2/4">Rental income.</li>
+      <li class="px-4 py-2 w-1/4 text-right">$1,200.00</li>
+    </ul>
+    <ul class="flex border-b border-gray-200 last:border-b-8 last:mb-4">
+      <li class="px-4 py-2 w-1/4">12/02/2023</li>
+      <li class="px-4 py-2 w-2/4">Rental income.</li>
+      <li class="px-4 py-2 w-1/4 text-right">$1,200.00</li>
+    </ul>
+    <ul class="flex bg-gray-50 border-b border-gray-200 last:border-b-8 last:mb-4">
+      <li class="px-4 py-2 w-1/4">12/02/2023</li>
+      <li class="px-4 py-2 w-2/4">Rental income.</li>
+      <li class="px-4 py-2 w-1/4 text-right">$1,200.00</li>
+    </ul>
+    <ul class="flex border-b border-gray-200 last:border-b-8 last:mb-4">
+      <li class="px-4 py-2 w-1/4">12/02/2023</li>
+      <li class="px-4 py-2 w-2/4">Rental income.</li>
+      <li class="px-4 py-2 w-1/4 text-right">$1,200.00</li>
+    </ul>
+    <ul class="flex bg-gray-50 border-b border-gray-200 last:border-b-8 last:mb-4">
+      <li class="px-4 py-2 w-1/4">12/02/2023</li>
+      <li class="px-4 py-2 w-2/4">Rental income.</li>
+      <li class="px-4 py-2 w-1/4 text-right">$1,200.00</li>
+    </ul>
+  </div>
+</div>

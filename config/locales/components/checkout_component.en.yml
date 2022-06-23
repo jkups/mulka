@@ -1,13 +1,17 @@
 en:
   checkout_component:
-    minimum_unit: "Min. Investment: %{unit} unit"
+    minimum_unit: "Minimum Units: %{unit} unit"
     available_units: Available Units
-    review_message_html: You are about to secure <b>%{units} units</b> of <b>%{name}</b> at <b>%{unit_price}/unit</b>. This transaction will be associated with your <b>%{acc_name}</b> portfolio.
-    transaction_summary: Transaction Summary
+    review_checkout: Review Checkout
+    review_message: You are about to secure <b>%{units} units</b> of <b>%{name}</b> at <b>%{unit_price}/unit</b>. This transaction will be associated with your <b>%{acc_name}</b> portfolio.
+    tranzaction_summary: Transaction Summary
     units_to_acquire: Units to Acquire
     subtotal: Subtotal
-    transaction_fee: Transaction Fee
+    tranzaction_fee: Transaction Fee
     grand_total: Grand Total
     pay_with_paypal: Pay with Paypal
+    pay_with_card: Pay with Card
     checkout: Checkout
-    acc_number: "Portfolio No: %{acc_number}"
+    portfolio_number: "Portfolio No: %{portfolio_number}"
+    price_per_unit: "%{price_per_unit} /unit"
+    estimated_yield: "Estimated Yield: %{yield}%"

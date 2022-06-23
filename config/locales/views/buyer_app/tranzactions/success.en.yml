@@ -1,0 +1,7 @@
+en:
+  buyer_app:
+    tranzactions:
+      success:
+        heading: Congratulations! Your transaction was successful.
+        congrats_message: You will soon receive an email with next steps including signing the Tenancy in Common agreement.
+        portfolio_label: Goto my Portfolio

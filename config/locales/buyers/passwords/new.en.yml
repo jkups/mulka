@@ -1,0 +1,8 @@
+en:
+  buyers:
+    passwords:
+      new:
+        email: Email Address
+        send_password: Send reset instructions
+        forgot_password_heading: Forgot your password?
+        forgot_password_message: We will send instructions on how to reset your password to your registered email address.

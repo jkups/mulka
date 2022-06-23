@@ -1,7 +1,0 @@
-en:
-  transactions:
-    table_component:
-      property_column_heading: Property
-      units_column_heading: Units
-      value_column_heading: Value
-      fees_column_heading: Fees

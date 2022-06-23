@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <%= render partial: "shared/head" %>
+  <body>
+    <div>
+      <%= render partial: "layouts/buyer_app/topnav" %>
+      <%= render partial: "shared/flash" %>
+      <%= yield %>
+      <%= render partial: "shared/footer" %>
+    </div>
+  </body>
+</html>

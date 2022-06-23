@@ -1,0 +1,20 @@
+<div data-controller="toggle-switch" class="col-span-6 border border-gray-200 p-4 rounded-2xl">
+  <div class="text-sm flex justify-between">
+    <div>
+      <%== t(".income_expense_history", subheading: content_tag(:div, t(".history"), class: "text-lg font-semibold text-green-500")) %>
+    </div>
+    <div class="flex gap-x-2">
+      <span><%= t(".rent") %></span>
+      <%= render Ui::ToggleSwitchComponent.new %>
+      <span><%= t(".expense") %></span>
+    </div>
+  </div>
+
+  <div data-toggle-switch-target="toggleable">
+    <%= render SettledProperties::RentalIncomeHistoryComponent.new %>
+  </div>
+
+  <div data-toggle-switch-target="toggleable" class="hidden">
+    <%= render SettledProperties::ExpenseHistoryComponent.new %>
+  </div>
+</div>

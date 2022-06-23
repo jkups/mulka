@@ -1,0 +1,10 @@
+en:
+  settled_properties:
+    ownership_share_component:
+      monthly_rent: Monthly %{subheading}
+      rent_year_to_date: Year To Date %{subheading}
+      current_property_value: Current Estimated %{subheading}
+      percentage_ownership: Percentage %{subheading}
+      ownership: Ownership
+      rental_income: Rental Income
+      property_value: Property Value

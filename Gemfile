@@ -15,6 +15,9 @@ gem "dry-monads", "~> 1.4"
 gem "dry-transaction", "~> 0.13.3"
 gem "good_job", "~> 2.9"
 gem "faker", "~> 2.19"
+gem "inline_svg"
+gem "apexcharts"
+gem "functionable-json"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

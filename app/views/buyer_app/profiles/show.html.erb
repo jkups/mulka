@@ -1,0 +1,73 @@
+<section class="max-w-screen-xl mx-auto mt-20">
+  <h3 class="text-3xl font-bold"><%= t(".my_profile") %></h3>
+  <div class="mt-20">
+    <%= form_with model: @form, scope: @form.scope, builder: BuyerApp::FormBuilder, url: {action: :update, controller: :profiles}, data: {page_reload_target: :form}, method: "put" do |f|%>
+      <div class="flex gap-x-8">
+        <div class="grid grid-cols-12 overflow-hidden rounded-l-2xl">
+          <div class="col-span-6 bg-gray-200 p-10 mr-5 text-lg text-gray-500">
+            <h4 class="text-xl font-semibold mb-5"><%= t(".basic_information") %></h4>
+            This fields are required and mandeatory if you now wha I mean  Please fill as accurately as possible.
+          </div>
+          <div class="col-span-6">
+            <div>
+              <%= f.label :full_name, t(".full_name") %>
+              <%= f.text_field :full_name, class: "form-input", value: @form.full_name, disabled: true %>
+              <%= f.field_errors :full_name %>
+            </div>
+
+            <div class="mt-6">
+              <%= f.label :preferred_name, t(".preferred_name") %>
+              <%= f.text_field :preferred_name, class: "form-input", value: @form.preferred_name %>
+            </div>
+
+            <div class="mt-6">
+              <%= f.label :email, t(".email") %>
+              <%= f.email_field :email, class: "form-input", value: @form.email %>
+              <%= f.field_errors :email %>
+            </div>
+
+            <div class="mt-6">
+              <%= f.label :mobile_number, t(".mobile_number") %>
+              <%= f.text_field :mobile_number, class: "form-input", value: @form.mobile_number %>
+              <%= f.field_errors :mobile_number %>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 overflow-hidden rounded-l-2xl">
+          <div class="col-span-6 bg-gray-200 p-10 mr-5 text-lg text-gray-500">
+            <h4 class="text-xl font-semibold mb-5"><%= t(".address_information") %></h4>
+            This fields are required and mandeatory if you now wha I mean  Please fill as accurately as possible.
+          </div>
+          <div class="col-span-6">
+            <div>
+              <%= f.label :address, t(".address") %>
+              <%= f.text_field :address, class: "form-input", value: @form.address %>
+               <%= f.field_errors :address %>
+            </div>
+
+            <div class="mt-6">
+              <%= f.label :suburb, t(".suburb") %>
+              <%= f.text_field :suburb, class: "form-input", value: @form.suburb %>
+              <%= f.field_errors :suburb %>
+            </div>
+
+            <div class="mt-6">
+              <%= f.label :city, t(".city") %>
+              <%= f.text_field :city, class: "form-input", value: @form.city %>
+              <%= f.field_errors :city %>
+            </div>
+
+            <div class="mt-6">
+              <%= f.label :country, t(".country") %>
+              <%= f.text_field :country, class: "form-input", value: @form.country %>
+              <%= f.field_errors :country %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="my-10 text-right">
+        <%= render Ui::PrimaryButtonComponent.new(title: t(".update_profile"), rounded: true) %>
+      </div>
+    <% end %>
+  </div>
+</section>

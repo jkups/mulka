@@ -16,7 +16,7 @@ module Ui
 
     def button_class
       DEFAULT_LINK_BUTTON_CLASS << " w-full" if full_width.present?
-      DEFAULT_LINK_BUTTON_CLASS << " rounded-md" if rounded.present?
+      DEFAULT_LINK_BUTTON_CLASS << " rounded-full" if rounded.present?
       DEFAULT_LINK_BUTTON_CLASS.join
     end
   end

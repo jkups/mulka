@@ -1,0 +1,7 @@
+en:
+  buyer_app:
+    settled_properties:
+      show:
+        empty_state_heading: This property is not settled yet.
+        empty_state_description_one: Details about your property will be displayed here the moment the settlement process is concluded.
+        empty_state_description_two: We will also send you an email when that happens. Please stay tuned.

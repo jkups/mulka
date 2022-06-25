@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  time:
+    formats:
+      short: "%d/%m/%Y" # 25/06/2022
+      medium: "%d %B %Y" # 25 July 2022

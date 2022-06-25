@@ -48,7 +48,7 @@ module Tranzactions
     end
 
     def view_property
-      path = buyer_app_portfolio_property_path(portfolio_id: portfolio_id, id: property_id)
+      path = buyer_app_portfolio_settled_property_path(portfolio_id: portfolio_id, id: property_id)
 
       content_tag(:a, href: path, target: "_blank") do
         i_tag = tag.i class: "fas fa-external-link-alt text-sm ml-1"

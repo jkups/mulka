@@ -8,14 +8,14 @@
 <div class="col-span-3 grid grid-rows-3 gap-y-4">
   <div class="border border-gray-200 p-4 rounded-2xl">
     <div class="text-sm"><%== t(".monthly_rent", subheading: content_tag(:div, t(".rental_income"), class: "text-lg font-semibold text-green-500")) %></div>
-    <div class="text-3xl font-semibold mt-2">$1,629.00</div>
+    <div class="text-3xl font-semibold mt-2"><%= monthly_rent %></div>
   </div>
   <div class="border border-gray-200 p-4 rounded-2xl">
     <div class="text-sm"><%== t(".rent_year_to_date", subheading: content_tag(:div, t(".rental_income"), class: "text-lg font-semibold text-green-500")) %></div>
-    <div class="text-3xl font-semibold mt-2">$5,789.00</div>
+    <div class="text-3xl font-semibold mt-2"><%= rental_income_to_date %></div>
   </div>
   <div class="border border-gray-200 p-4 rounded-2xl">
     <div class="text-sm"><%== t(".current_property_value", subheading: content_tag(:div, t(".property_value"), class: "text-lg font-semibold text-green-500")) %></div>
-    <div class="text-3xl font-semibold mt-2">$650,000.00</div>
+    <div class="text-3xl font-semibold mt-2"><%= current_property_value %></div>
   </div>
 </div>

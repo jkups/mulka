@@ -1,9 +1,0 @@
-en:
-  buyer_app:
-    properties:
-      show:
-        property_status: Property Status
-        lease_term: Lease Term
-        lease_end_date: Lease End Date
-        property_manager: Property Manager
-        property_liaison: Your Liaison

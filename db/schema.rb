@@ -16,6 +16,19 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "admins", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "full_name", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at", precision: 6
+    t.datetime "remember_created_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
   create_table "buyers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "full_name", null: false
     t.string "preferred_name"
@@ -119,7 +132,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
   create_table "portfolio_settled_properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "portfolio_id", null: false
     t.uuid "settled_property_id", null: false
-    t.integer "units"
+    t.integer "units", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["portfolio_id"], name: "index_portfolio_settled_properties_on_portfolio_id"
@@ -222,6 +235,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
   create_table "settled_properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "property_id", null: false
     t.uuid "property_manager_id", null: false
+    t.uuid "liaison_id", null: false
     t.integer "status", null: false
     t.decimal "monthly_rent", null: false
     t.datetime "lease_start_on", precision: 6, null: false
@@ -229,6 +243,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
     t.string "lease_term", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["liaison_id"], name: "index_settled_properties_on_liaison_id"
     t.index ["property_id"], name: "index_settled_properties_on_property_id"
     t.index ["property_manager_id"], name: "index_settled_properties_on_property_manager_id"
   end
@@ -259,6 +274,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
   add_foreign_key "property_features", "properties"
   add_foreign_key "property_rents", "settled_properties"
   add_foreign_key "property_valuations", "settled_properties"
+  add_foreign_key "settled_properties", "admins", column: "liaison_id"
   add_foreign_key "settled_properties", "properties"
   add_foreign_key "settled_properties", "property_managers"
   add_foreign_key "tranzactions", "external_references"

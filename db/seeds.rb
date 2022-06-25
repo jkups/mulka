@@ -1,13 +1,3 @@
-Users::Buyer.destroy_all
-Tranzactions::Tranzaction.destroy_all
-Portfolios::Portfolio.destroy_all
-Properties::PropertyFeature.destroy_all
-Properties::Property.destroy_all
-Properties::SettledProperty.destroy_all
-Properties::PropertyRent.destroy_all
-Properties::PropertyExpense.destroy_all
-Properties::PropertyValuation.destroy_all
-
 PROPERTY_TYPE = ["Apartment", "Terrace", "House"].freeze
 PROPERTY_IMAGE = [
   "na8vluep3ak42mhnbnj1",
@@ -15,7 +5,14 @@ PROPERTY_IMAGE = [
   "gkjnuyskk7dctedu8odl"
 ]
 
-buyer = Users::Buyer.create!(
+liaison = Admin.create!(
+  full_name: "Ashley Tray",
+  email: "ashley@example.com",
+  password: "password",
+  password_confirmation: "password"
+)
+
+buyer = Buyer.create!(
   full_name: "Jane Smith",
   preferred_name: "Jane",
   email: "jane@example.com",
@@ -153,11 +150,18 @@ end
 settled_property = Properties::SettledProperty.create!(
   property: property_to_be_settled,
   property_manager: property_manager,
+  liaison: liaison,
   monthly_rent: 16972,
   lease_start_on: Date.today - 8.months,
   lease_end_on: Date.today + 4.months,
   lease_term: "Annual",
   status: Properties::SettledProperty.statuses.fetch(:occupied)
+)
+
+Portfolios::PortfolioSettledProperty.create(
+  portfolio: portfolio,
+  settled_property: settled_property,
+  units: 6
 )
 
 p "settled properties with corresponding offers and tranzactions were successfully created"
@@ -178,8 +182,8 @@ p "property valuation was successfully created"
   Properties::PropertyRent.create!(
     settled_property: settled_property,
     date: date,
-    description: "Rent for the month of #{date.month}.",
-    amount: 16972
+    description: "Rent for the month of #{Date::MONTHNAMES[date.month]}.",
+    amount: 1697
   )
 end
 
@@ -191,7 +195,7 @@ p "property rent was successfully created"
     settled_property: settled_property,
     date: date,
     description: Faker::Lorem.sentence,
-    amount: Faker::Number.number(digits: 4)
+    amount: Faker::Number.number(digits: 3)
   )
 end
 

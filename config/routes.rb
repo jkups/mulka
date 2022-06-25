@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   devise_for :buyers, controllers: {registrations: "buyers/registrations"}
   devise_for :sellers
 
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
       root to: redirect("/buyer_app/portfolios")
       resource :profiles, only: %i[show update]
       resources :portfolios, only: %i[index] do
-        resources :properties, only: %i[show]
+        resources :settled_properties, only: %i[show]
       end
       resources :offers, only: %i[index show] do
         resources :tranzactions, only: %i[new create]

@@ -11,10 +11,14 @@
   </div>
 
   <div data-toggle-switch-target="toggleable">
-    <%= render SettledProperties::RentalIncomeHistoryComponent.new %>
+    <%= render SettledProperties::RentalIncomeHistoryComponent.new(
+      property_rents: settled_property.property_rents
+    ) %>
   </div>
 
   <div data-toggle-switch-target="toggleable" class="hidden">
-    <%= render SettledProperties::ExpenseHistoryComponent.new %>
+    <%= render SettledProperties::ExpenseHistoryComponent.new(
+      property_expenses: settled_property.property_expenses
+    ) %>
   </div>
 </div>

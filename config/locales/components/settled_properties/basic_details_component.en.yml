@@ -1,0 +1,8 @@
+en:
+  settled_properties:
+    basic_details_component:
+      property_status: Property Status
+      lease_term: Lease Term
+      lease_end_date: Lease End Date
+      property_manager: Property Manager
+      property_liaison: Your Liaison

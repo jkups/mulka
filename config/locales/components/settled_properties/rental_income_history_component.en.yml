@@ -3,4 +3,4 @@ en:
     rental_income_history_component:
       date_column_heading: Date
       description_column_heading: Description
-      value_column_heading: Value
+      amount_column_heading: Amount

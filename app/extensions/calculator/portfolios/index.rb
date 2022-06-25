@@ -57,7 +57,7 @@ module Calculator
         offer = Queries::BuyerApp::Offers::FindById.perform(offer_id: offer_id)
 
         TrxnSummary.new(
-          offer_id: offer_id,
+          offer_id: offer.id,
           portfolio_id: portfolio.id,
           property_id: offer.property_id,
           property_name: offer.property.name,

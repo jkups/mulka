@@ -27,11 +27,11 @@
   <div class="w-7/12 border border-gray-200 p-8 relative">
     <h3 class="text-xl font-bold"><%= t(".review_checkout") %></h3>
     <p class="mt-4">
-      <%== t(".review_message", acc_name: active_portfolio.name, units: tranzaction.number_of_units, unit_price: price_per_unit, name: tranzaction.name) %>
+      <%== t(".review_message", acc_name: active_portfolio.name, units: pluralize(tranzaction.number_of_units, "unit"), unit_price: price_per_unit, name: tranzaction.name) %>
     </p>
 
     <div class="absolute bottom-8 inset-x-8">
-      <%= form_with model: tranzaction, scope: tranzaction.scope, url: { action: 'create', controller: :tranzactions },data: {page_reload_target: :form, paypal_payment_target: :form, card_payment_target: :form} do |f|%>
+      <%= form_with model: tranzaction, scope: tranzaction.scope, url: { action: "create", controller: :tranzactions },data: {page_reload_target: :form, paypal_payment_target: :form, card_payment_target: :form} do |f|%>
         <div class="flex justify-between">
           <h4 class="text-lg font-semibold text-gray-500"><%= t(".tranzaction_summary") %></h4>
           <div
@@ -52,7 +52,7 @@
                 class: "form-input pl-2",
                 autofocus: true,
                 data: {
-                  action: "input->number-of-units#update reload@window->page-reload#refreshWithParams",
+                  action: "input->number-of-units#update",
                   paypal_payment_target: "unitsInput",
                   number_of_units_target: "unitsInput"
                 }
@@ -106,8 +106,6 @@
   <%= render CardPaymentModalComponent.new %>
   <%= render PaymentProcessingModalComponent.new %>
 </div>
-<div class="mt-4 text-gray-500 text-sm">
-  Note: We will send you a mail with a copy of the Tenancy in Common agreement for you to sign immediately after payment.
-</div>
+<div class="mt-4 text-gray-500 text-sm"><%== t(".disclaimer") %></div>
 
 

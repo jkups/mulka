@@ -6,6 +6,7 @@ export default class extends Controller {
     "refreshPriceButton",
     "payWithPaypalButton",
     "payWithCardButton",
+    "eoiButton",
   ];
 
   static values = {
@@ -17,11 +18,15 @@ export default class extends Controller {
   declare refreshPriceButtonTarget: HTMLDivElement;
   declare payWithPaypalButtonTarget: HTMLButtonElement;
   declare payWithCardButtonTarget: HTMLButtonElement;
+  declare eoiButtonTarget: HTMLButtonElement;
+  declare hasPayWithPaypalButtonTarget: Boolean;
+  declare hasEoiButtonTarget: Boolean;
   declare minValue: number;
   declare maxValue: number;
 
   update(): void {
     this.disablePayButtons();
+    this.disableEOIButton();
     this.showRefreshButton();
     this.formatInput();
   }
@@ -38,8 +43,16 @@ export default class extends Controller {
   }
 
   disablePayButtons(): void {
-    this.payWithPaypalButtonTarget.disabled = true;
-    this.payWithCardButtonTarget.disabled = true;
+    if (this.hasPayWithPaypalButtonTarget) {
+      this.payWithPaypalButtonTarget.disabled = true;
+      this.payWithCardButtonTarget.disabled = true;
+    }
+  }
+
+  disableEOIButton(): void {
+    if (this.hasEoiButtonTarget) {
+      this.eoiButtonTarget.disabled = true;
+    }
   }
 
   showRefreshButton(): void {

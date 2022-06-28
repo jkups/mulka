@@ -1,24 +1,24 @@
 module BuyerApp
   class TranzactionsController < MainController
     def new
-      @tranzaction = Forms::BuyerApp::Tranzactions::Create.from_params(
+      @form = Forms::BuyerApp::Tranzactions::Create.from_params(
         params: params,
         buyer: current_buyer
       )
     end
 
     def create
-      @tranzaction = Forms::BuyerApp::Tranzactions::Create.from_params(
+      @form = Forms::BuyerApp::Tranzactions::Create.from_params(
         params: params,
         buyer: current_buyer
       )
 
-      result = UseCases::BuyerApp::Tranzactions::Create.call(@tranzaction)
+      result = UseCases::BuyerApp::Tranzactions::Create.call(@form)
 
       if result.success?
-        redirect_to buyer_app_offer_tranzactions_success_path(offer_id: @tranzaction.offer.id)
+        redirect_to buyer_app_offer_tranzaction_success_path(offer_id: @form.offer.id)
       else
-        redirect_to buyer_app_offer_tranzactions_failure_path(offer_id: @tranzaction.offer.id)
+        redirect_to buyer_app_offer_tranzaction_failure_path(offer_id: @form.offer.id)
       end
       # if result.success?
       #   flash[:notice] = "Transaction was successful."

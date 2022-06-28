@@ -12,6 +12,7 @@ module ApexChartsHelper
     {
       height: CHART_HEIGHT,
       data_labels: false,
+      defer: true,
       markers: {size: MARKER_SIZE},
       yaxis: {show: false},
       colors: PRIMARY_CHART_COLOR,
@@ -24,6 +25,7 @@ module ApexChartsHelper
       legend: false,
       height: RADIAL_CHART_HEIGHT,
       colors: PRIMARY_CHART_COLOR,
+      defer: true,
       plot_options: {
         radial_bar: {
           data_labels: {

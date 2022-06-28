@@ -39,7 +39,7 @@ portfolio = Portfolios::Portfolio.create!(
 )
 p "portfolio was sucessfully created"
 
-def generate_offer(property, total_units = 1000, status = Tranzactions::Offer.statuses.fetch(:active))
+def generate_offer(property, total_units: 1000, status: Tranzactions::Offer.statuses.fetch(:active))
   Tranzactions::Offer.create!(
     property: property,
     total_units: total_units,
@@ -130,10 +130,10 @@ property_to_be_settled = Properties::Property.create!(
 )
 
 generate_property_features(property_to_be_settled)
-offer = generate_offer(property_to_be_settled, 6, Tranzactions::Offer.statuses.fetch(:sold_out))
+settled_property_offer = generate_offer(property_to_be_settled, total_units: 6, status: Tranzactions::Offer.statuses.fetch(:sold_out))
 
 3.times do
-  unit_price = offer.price / offer.total_units
+  unit_price = settled_property_offer.price / settled_property_offer.total_units
   units_to_acquire = 2
   amount = unit_price * units_to_acquire
 
@@ -141,7 +141,7 @@ offer = generate_offer(property_to_be_settled, 6, Tranzactions::Offer.statuses.f
     units: units_to_acquire,
     amount: amount,
     fee: amount * 0.1,
-    offer: offer,
+    offer: settled_property_offer,
     portfolio: portfolio,
     external_reference: generate_external_reference
   )
@@ -200,3 +200,31 @@ p "property rent was successfully created"
 end
 
 p "property expense was successfully created"
+
+eoi_property = Properties::Property.create!(
+  pid: "PID" + (rand * 1000).round.to_s,
+  name: Faker::Restaurant.name,
+  address: Faker::Address.full_address,
+  suburb: Faker::Address.zip_code,
+  city: Faker::Address.city,
+  country: Faker::Address.country,
+  description: Faker::Restaurant.description,
+  image: "jlsvt4sms9ymprcrljjy",
+  occupied: false,
+  category: "House",
+  classification: Properties::Property.classifications.fetch(:newly_built),
+  organization: organization
+)
+
+generate_property_features(eoi_property)
+offer = generate_offer(eoi_property, total_units: 500, status: Tranzactions::Offer.statuses.fetch(:expression_of_interest))
+
+p "eoi property and corresponding offer was successfully created"
+
+Tranzactions::ExpressionOfInterest.create!(
+  offer: offer,
+  buyer: buyer,
+  units: 10
+)
+
+p "eoi was successfully created"

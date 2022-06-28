@@ -3,5 +3,5 @@ class Tranzactions::Offer < ApplicationRecord
   has_many :tranzactions
   has_many :expression_of_interests
 
-  enum status: [:inactive, :active, :sold_out], _suffix: true
+  enum status: [:inactive, :active, :sold_out, :expression_of_interest], _suffix: true
 end

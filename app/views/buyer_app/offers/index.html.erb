@@ -9,7 +9,7 @@
   <div class="border-b border-gray-200 py-4 text-xl">
     <%= @offers.size %> <%= t(".properties_listed") %>
   </div>
-  <div class="my-8 flex justify-between">
+  <div class="grid grid-cols-6 gap-6 my-8">
     <%= render Offers::IndexComponent.with_collection(@offers) %>
   </div>
 </section>

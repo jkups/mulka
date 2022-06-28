@@ -1,0 +1,7 @@
+en:
+  buyer_app:
+    expression_of_interests:
+      success:
+        heading: Congratulations! We've received your expression of interest.
+        congrats_message: We will send you an email notification when the property is open for investments. Meanwhile you can make an investment in other available properties.
+        eoi_button: Make an Investment

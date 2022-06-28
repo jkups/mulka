@@ -1,5 +1,6 @@
 module.exports = {
   content: [
+    "./app/assets/**/*.svg",
     "./app/components/**/*.rb",
     "./app/**/*.html.erb",
     "./app/javascript/**/*.js",
@@ -11,12 +12,6 @@ module.exports = {
         104: "24rem",
         108: "26rem",
       },
-    },
-  },
-  variants: {
-    extend: {
-      borderWidth: ["last"],
-      margin: ["last"],
     },
   },
   plugins: [],

@@ -1,7 +1,7 @@
 en:
   buyer_app:
-    tranzactions:
+    expression_of_interests:
       failure:
-        heading: Ooops! Something went wrong with your transaction.
+        heading: Ooops! Something went wrong with your expression of interest.
         failure_message: So sorry about this. Our team of tech experts are taking a look, but in the meantime please try again.
         try_again_button: Try Again

@@ -30,7 +30,7 @@ module Forms
 
           def from_params(params:, buyer:)
             tranzaction = params[scope]
-            offer = ::Tranzactions::Offer.find_by!(id: params[:offer_id])
+            offer = Queries::BuyerApp::Offers::FindById.perform(offer_id: params[:offer_id])
 
             nonce = tranzaction[:nonce] if tranzaction.present?
             payment_method = tranzaction[:payment_method] if tranzaction.present?

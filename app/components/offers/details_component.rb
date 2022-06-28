@@ -8,6 +8,10 @@ module Offers
 
     attr_reader :offer
 
+    def eoi_offer?
+      offer.expression_of_interest_status?
+    end
+
     def property_image_path
       cl_image_path(offer.property.image)
     end

@@ -3,7 +3,7 @@ en:
     minimum_unit: "Minimum Units: %{unit} unit"
     available_units: Available Units
     review_checkout: Review Checkout
-    review_message: You are about to secure <b>%{units} units</b> of <b>%{name}</b> at <b>%{unit_price}/unit</b>. This transaction will be associated with your <b>%{acc_name}</b> portfolio.
+    review_message: You are about to secure <b>%{units}</b> of <b>%{name}</b> at <b>%{unit_price}/unit</b>. This transaction will be associated with your <b>%{acc_name}</b> portfolio.
     tranzaction_summary: Transaction Summary
     units_to_acquire: Units to Acquire
     subtotal: Subtotal
@@ -15,3 +15,4 @@ en:
     portfolio_number: "Portfolio No: %{portfolio_number}"
     price_per_unit: "%{price_per_unit} /unit"
     estimated_yield: "Estimated Yield: %{yield}%"
+    disclaimer: "Note: We will send you a mail with a copy of the Tenancy in Common agreement for you to sign immediately after payment."

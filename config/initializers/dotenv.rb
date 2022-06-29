@@ -9,7 +9,8 @@ if Rails.env.development? || Rails.env.test?
     "BRAINTREE_MERCHANT_ID",
     "BRAINTREE_PUBLIC_KEY",
     "BRAINTREE_PRIVATE_KEY",
-    "PAYPAL_CLIENT_ID"
+    "PAYPAL_CLIENT_ID",
+    "SENDGRID_API_KEY"
   )
 
   Dotenv.parse(".env.local")

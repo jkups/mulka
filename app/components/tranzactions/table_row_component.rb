@@ -18,7 +18,7 @@ module Tranzactions
     def toggle_tranzactions_button
       content_tag(
         :span,
-        class: "px-2 mr-4 cursor-pointer transform",
+        class: "px-2 mr-4 cursor-pointer transform hidden md:block",
         data: {action: "click->portfolio#toggleTrxnContainer", id: offer_id}
       ) { tag.i class: "fas fa-chevron-down text-base text-green-500" }
     end

@@ -1,10 +1,10 @@
-<ul class="flex bg-gray-200 p4 divide-x divide-gray-300 text-lg font-semibold">
-  <li class="p-4 w-1/5"></li>
-  <li class="p-4 w-1/5"><%= t(".property_column_heading") %></li>
-  <li class="p-4 w-1/5"><%= t(".units_column_heading") %></li>
-  <li class="p-4 w-1/5 text-right"><%= t(".amount_column_heading") %></li>
-  <li class="p-4 w-1/5 text-right"><%= t(".fees_column_heading") %></li>
-  <li class="p-4 w-1/5"></li>
+<ul class="flex bg-gray-200 p4 divide-x divide-gray-300 text-base md:text-lg md:font-semibold">
+  <li class="p-4 hidden md:block md:w-1/4 lg:w-1/6"></li>
+  <li class="p-4 w-full md:w-1/4 lg:w-1/6"><%= t(".property_name_column_heading") %></li>
+  <li class="p-4 w-1/4 hidden md:block lg:w-1/6"><%= t(".units_column_heading") %></li>
+  <li class="p-4 w-1/6 text-right hidden lg:block"><%= t(".amount_column_heading") %></li>
+  <li class="p-4 w-1/6 text-right hidden lg:block"><%= t(".fees_column_heading") %></li>
+  <li class="p-4 w-1/3 md:w-1/4 lg:w-1/6"></li>
 </ul>
 <div class="mb-20" data-controller="portfolio">
   <%= render Tranzactions::TableRowComponent.with_collection(prepared_tranzactions)%>

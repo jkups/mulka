@@ -1,20 +1,11 @@
 <header class="border-b border-gray-300">
   <div class="max-w-screen-xl mx-auto">
-    <div class="py-4 flex justify-between">
-      <div class="text-xl font-bold text-green-500">
+    <div class="flex justify-between">
+      <div class="p-4 text-xl font-bold text-green-500 lg:px-0">
         <%= link_to "Mulka", buyer_app_offers_path %>
       </div>
-      <div class="flex items-center text-lg">
-        <ul class="flex">
-          <li class="mr-8 font-semibold hover:text-green-500"><%= link_to t(".properties"), buyer_app_offers_path %></li>
-          <li class="mr-8 font-semibold hover:text-green-500"><%= link_to t(".portfolios"), buyer_app_portfolios_path %></li>
-        </ul>
-        <%= render Ui::DropdownMenuComponent.new do |c| %>
-          <% c.title_icon(text: current_buyer.preferred_name || current_buyer.full_name, icon: "fas fa-chevron-down") %>
-          <% c.menu_item(text: t(".profile"), path: buyer_app_profiles_path) %>
-          <% c.menu_item(text: t(".logout"), path: destroy_buyer_session_path, method: :delete) %>
-        <% end %>
-      </div>
+      <%= render Ui::DesktopNavigationComponent.new(user: current_buyer) %>
+      <%= render Ui::MobileNavigationComponent.new(user: current_buyer) %>
     </div>
   </div>
 </header>

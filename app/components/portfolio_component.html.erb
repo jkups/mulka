@@ -1,35 +1,41 @@
 <div>
-  <div class="flex justify-between">
-    <h3 class="text-3xl font-bold"><%= t(".my_portfolio") %></h3>
-    <div class="bg-gray-100 p-4 rounded-2xl text-right">
+  <div class="flex flex-col-reverse justify-between md:mx-0 md:flex-row">
+    <h3 class="text-2xl font-bold border-t border-gray-300 px-4 pt-6 md:text-3xl md:border-t-0 md:pt-0">
+      <%= t(".my_portfolio") %>
+    </h3>
+    <div class="p-4 rounded-2xl md:text-right md:bg-gray-100 md:mr-4 lg:mr-0">
       <div class="text-lg font-semibold"><%= portfolio_name %></div>
       <div class="text-xs italic"><%= t(".portfolio_number", portfolio_number: portfolio_number) %></div>
     </div>
   </div>
-  <div class="mt-10">
-    <ul class="flex mt-2 text-right space-x-4">
-      <li class="border border-gray-200 p-4 pr-8 w-2/12 rounded-2xl">
-        <div class="text-sm"><%== t(".acquired_properties", subheading: content_tag(:div, t(".properties"), class: "text-lg font-semibold text-green-500")) %></div>
-        <div class="text-3xl font-semibold mt-2"><%= total_number_of_properties %></div>
-      </li>
-      <li class="border border-gray-200 p-4 pr-8 w-2/12 rounded-2xl">
-        <div class="text-sm"><%== t(".units_acquired", subheading: content_tag(:div, t(".units"), class: "text-lg font-semibold text-green-500")) %></div>
-        <div class="text-3xl font-semibold mt-2"><%= total_units_acquired %></div>
-      </li>
-      <li class="border border-gray-200 p-4 pr-8 w-4/12 rounded-2xl">
-        <div class="text-sm"><%== t(".total_investment_amount", subheading: content_tag(:div, t(".investment_amount"), class: "text-lg font-semibold text-green-500")) %></div>
-        <div class="text-3xl font-semibold mt-2"><%= total_investment_amount %></div>
-      </li>
-      <li class="border border-gray-200 p-4 pr-8 w-4/12 rounded-2xl">
-        <div class="text-sm"><%== t(".total_transaction_fee", subheading: content_tag(:div, t(".transaction_fee"), class: "text-lg font-semibold text-green-500")) %></div>
-        <div class="text-3xl font-semibold mt-2"><%= total_tranzaction_fee %></div>
-      </li>
-    </ul>
+  <div class="mt-10 px-4 lg:px-0">
+    <div class="grid grid-cols-12 mt-2 text-right gap-4">
+      <div class="col-span-full grid gap-4 md:col-span-4 grid-cols-4">
+        <div class="border border-gray-200 p-4 pr-8 col-span-2 rounded-2xl md:col-span-full lg:col-span-2">
+          <div class="text-sm"><%== t(".acquired_properties", subheading: content_tag(:div, t(".properties"), class: "text-base md:text-lg font-semibold text-green-500")) %></div>
+          <div class="text-2xl md:text-3xl font-semibold mt-2"><%= total_number_of_properties %></div>
+        </div>
+        <div class="border border-gray-200 p-4 pr-8 col-span-2 rounded-2xl md:col-span-full lg:col-span-2">
+          <div class="text-sm"><%== t(".units_acquired", subheading: content_tag(:div, t(".units"), class: "text-base md:text-lg font-semibold text-green-500")) %></div>
+          <div class="text-2xl md:text-3xl font-semibold mt-2"><%= total_units_acquired %></div>
+        </div>
+      </div>
+      <div class="col-span-full md:col-span-8 grid gap-4 lg:grid-cols-8">
+        <div class="border border-gray-200 p-4 pr-8 col-span-4 rounded-2xl">
+          <div class="text-sm"><%== t(".total_investment_amount", subheading: content_tag(:div, t(".investment_amount"), class: "text-base md:text-lg font-semibold text-green-500")) %></div>
+          <div class="text-2xl md:text-3xl font-semibold mt-2"><%= total_investment_amount %></div>
+        </div>
+        <div class="border border-gray-200 p-4 pr-8 col-span-4 rounded-2xl">
+          <div class="text-sm"><%== t(".total_transaction_fee", subheading: content_tag(:div, t(".transaction_fee"), class: "text-base md:text-lg font-semibold text-green-500")) %></div>
+          <div class="text-2xl md:text-3xl font-semibold mt-2"><%= total_tranzaction_fee %></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="mt-20">
-  <h3 class="text-xl font-bold"><%= t(".portfolio_properties") %></h3>
+<div class="mt-10 md:mt-20 md:px-4">
+  <h3 class="text-xl px-4 font-bold md:px-0"><%= t(".portfolio_properties") %></h3>
   <div class="mt-2">
     <%= render Tranzactions::TableComponent.new(prepared_tranzactions: grouped_portfolio.prepared_tranzactions) %>
   </div>

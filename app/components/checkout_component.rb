@@ -61,21 +61,21 @@ class CheckoutComponent < ViewComponent::Base
 
   def property_image_with_details
     content_tag(:div,
-      class: "bg-cover bg-no-repeat h-108 relative", style: "background-image: url(#{property_image_path})") do
+      class: "bg-cover bg-no-repeat h-full relative", style: "background-image: url(#{property_image_path})") do
         children = available_unit
         children << property_details
     end
   end
 
   def available_unit
-    content_tag(:div, class: "absolute top-0 mx-8 px-4 pt-12 pb-4 bg-green-500 text-white rounded-b-xl shadow-lg") do
+    content_tag(:div, class: "absolute top-0 mx-4 px-4 pt-12 pb-4 bg-green-500 text-white rounded-b-xl shadow-lg lg:mx-8") do
       children = content_tag(:p, t(".available_units"), class: "text-xs")
       children << content_tag(:p, units_available, class: "text-2xl font-semibold")
     end
   end
 
   def property_details
-    content_tag(:div, class: "flex justify-between p-8 bg-gray-100 bg-opacity-80 absolute inset-x-0 bottom-0") do
+    content_tag(:div, class: "flex justify-between py-8 px-4 bg-gray-100 bg-opacity-80 absolute inset-x-0 bottom-0 lg:px-8") do
       children = property_name_and_yield_tag
       children << property_price_and_min_investment_tag
     end
@@ -89,7 +89,7 @@ class CheckoutComponent < ViewComponent::Base
   end
 
   def property_price_and_min_investment_tag
-    content_tag(:div, class: "text-right") do
+    content_tag(:div, class: "hidden text-right lg:block") do
       children = content_tag(:h3, t(".price_per_unit", price_per_unit: price_per_unit), class: "text-xl font-semibold")
       children << content_tag(:p, minimum_unit_required)
     end

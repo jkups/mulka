@@ -1,0 +1,13 @@
+<div class="py-4 items-center text-lg hidden md:flex">
+  <ul class="flex">
+    <li class="mr-8 font-semibold hover:text-green-500"><%= link_to t(".properties"), buyer_app_offers_path %></li>
+    <li class="mr-8 font-semibold hover:text-green-500"><%= link_to t(".portfolios"), buyer_app_portfolios_path %></li>
+  </ul>
+  <div class="mx-4 lg:mx-0">
+    <%= render Ui::DropdownMenuComponent.new do |c| %>
+      <% c.title_icon(text: user.preferred_name || user.full_name, icon: "fas fa-chevron-down") %>
+      <% c.menu_item(text: t(".profile"), path: buyer_app_profiles_path) %>
+      <% c.menu_item(text: t(".logout"), path: destroy_buyer_session_path, method: :delete) %>
+    <% end %>
+  </div>
+</div>

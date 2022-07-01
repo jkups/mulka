@@ -9,4 +9,5 @@ en:
       estimated_yield: Estimate Yield
       minimum_unit: "%{minimum_unit} unit share"
       buy_units: Buy Units
+      expression_of_interest: I am Intersted
       unit_price: "%{unit_price} /unit"

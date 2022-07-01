@@ -1,7 +1,7 @@
 en:
   tranzactions:
     table_component:
-      property_column_heading: Property
+      property_name_column_heading: Property Name
       units_column_heading: Units
       amount_column_heading: Amount
       fees_column_heading: Fees

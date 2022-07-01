@@ -6,7 +6,11 @@ module SettledProperties
 
     private
 
-    attr_reader :settled_property
+    attr_reader :settled_property, :portfolio
+
+    def portfolio_tranzactions
+      portfolio.tranzactions
+    end
 
     def property_status
       settled_property.status.titleize

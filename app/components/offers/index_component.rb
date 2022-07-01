@@ -1,7 +1,14 @@
 module Offers
   class IndexComponent < ViewComponent::Base
+    OFFER_STATUS_COLOR = {
+      active: "text-white bg-green-500",
+      sold_out: "text-white bg-gray-500",
+      expression_of_interest: "text-white bg-amber-500"
+    }.with_indifferent_access.freeze
+
     THUMBNAIL_SIZE = {width: 400, height: 250}.freeze
-    private_constant :THUMBNAIL_SIZE
+
+    private_constant :THUMBNAIL_SIZE, :OFFER_STATUS_COLOR
 
     with_collection_parameter :offer
 
@@ -27,6 +34,10 @@ module Offers
 
     def property_address
       offer.property.address
+    end
+
+    def offer_status_color
+      OFFER_STATUS_COLOR.fetch(offer.status)
     end
 
     def offer_status

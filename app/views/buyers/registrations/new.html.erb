@@ -1,23 +1,23 @@
-<div class="grid grid-cols-2">
-  <div class="bg-gray-100">
+<div class="grid grid-cols-12">
+  <div class="bg-gray-100 col-span-1 md:col-span-4 lg:col-span-6">
     <div class="text-4xl text-green-500 mt-5 ml-5">
       <i class="fas fa-blog"></i>
     </div>
   </div>
-  <div class="flex flex-col justify-center items-center h-screen">
-    <div class="w-1/2">
-      <h2 class="text-3xl font-bold mb-20"><%= t(".signup_heading") %></h2>
+  <div class="col-span-11 flex flex-col justify-center items-center h-screen md:col-span-8 lg:col-span-6">
+    <div class="w-10/12 lg:w-1/2">
+      <h2 class="text-2xl font-bold mb-20 md:text-3xl"><%= t(".signup_heading") %></h2>
       <%= form_for(resource, as: resource_name, builder: BuyerApp::FormBuilder, url: registration_path(resource_name)) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-
         <div class="mt-6">
           <%= f.label :full_name, t(".full_name") %>
-          <%= f.text_field :full_name, autofocus: true %>
+          <%= f.text_field :full_name, autofocus: true, required: true %>
+          <%= f.field_errors :full_name %>
         </div>
 
         <div class="mt-6">
           <%= f.label :email, t(".email") %>
-          <%= f.email_field :email %>
+          <%= f.email_field :email, required: true %>
+          <%= f.field_errors :email %>
         </div>
 
         <div class="mt-6">
@@ -25,7 +25,8 @@
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %>
-          <%= f.password_field :password %>
+          <%= f.password_field :password, required: true %>
+          <%= f.field_errors :password %>
         </div>
 
         <div class="mt-10 mb-2">

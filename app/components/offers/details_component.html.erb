@@ -1,64 +1,65 @@
 <section>
-  <div class="max-w-screen-xl">
+  <div class="max-w-screen-xl relative">
     <%= property_image %>
+    <h2 class="text-3xl font-bold absolute bottom-0 px-4 py-4 text-white bg-green-500/75 w-full md:hidden">
+      <%= property_unit_price %>
+    </h2>
   </div>
 
-  <div class="mt-8 flex justify-between">
-    <div>
-      <h2 class="text-3xl font-bold">
+  <div class="mt-6 grid grid-cols-10 items-start md:mt-8">
+    <div class="mx-4 col-span-full md:col-span-4 lg:mx-0">
+      <h2 class="text-3xl font-bold hidden md:block">
         <%= property_unit_price %>
       </h2>
-      <div class="mt-10">
+      <div class="md:mt-10">
         <h3 class="text-2xl font-semibold"><%= offer.property.name %></h3>
         <p class="text-lg"><%= offer.property.address %></p>
         <%= render Offers::PropertyFeatureComponent.new(feature: offer.property.property_feature) %>
-        <div class="mt-10">
-          <% if eoi_offer? %>
-            <%= render Ui::PrimaryLinkButtonComponent.new(
-              title: t(".expression_of_interest"),
-              href: new_buyer_app_offer_expression_of_interest_path(offer_id: offer.id),
-              rounded: true
-            ) %>
-          <% else %>
-            <%= render Ui::PrimaryLinkButtonComponent.new(
-              title: t(".buy_units"),
-              href: new_buyer_app_offer_tranzaction_path(offer_id: offer.id),
-              rounded: true
-            ) %>
-          <% end %>
-        </div>
+        <% unless sold_out? %>
+          <div class="mt-10 md:my-10">
+            <% if eoi_offer? %>
+              <%= render Ui::PrimaryLinkButtonComponent.new(
+                title: t(".expression_of_interest"),
+                href: new_buyer_app_offer_expression_of_interest_path(offer_id: offer.id),
+                rounded: true
+              ) %>
+            <% else %>
+              <%= render Ui::PrimaryLinkButtonComponent.new(
+                title: t(".buy_units"),
+                href: new_buyer_app_offer_tranzaction_path(offer_id: offer.id),
+                rounded: true
+              ) %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
 
-    <div class="w-5/12">
-      <ul class="flex">
-        <li class="bg-gray-200 p-4 mx-1 w-1/3">
-          <div class="text-xs"><%= t(".investment_status") %></div>
-          <div class="text-lg"><%= property_status %></div>
-        </li>
-        <li class="bg-gray-200 p-4 mx-1 w-1/3">
-          <div class="text-xs"><%= t(".property_type") %></div>
-          <div class="text-lg"><%= property_type %></div>
-        </li>
-        <li class="bg-gray-200 p-4 mx-1 w-1/3">
-          <div class="text-xs"><%= t(".property_value") %></div>
-          <div class="text-lg"><%= property_value %></div>
-        </li>
-      </ul>
-      <ul class="flex mt-2">
-        <li class="bg-gray-200 p-4 mx-1 w-1/3">
-          <div class="text-xs"><%= t(".minimum_investment") %></div>
-          <div class="text-lg"><%= minimum_investment %></div>
-        </li>
-        <li class="bg-gray-200 p-4 mx-1 w-1/3">
-          <div class="text-xs"><%= t(".units_available") %></div>
-          <div class="text-lg"><%= units_available %></div>
-        </li>
-        <li class="bg-gray-200 p-4 mx-1 w-1/3">
-          <div class="text-xs"><%= t(".estimated_yield") %></div>
-          <div class="text-lg"><%= estimated_yield %></div>
-        </li>
-      </ul>
+    <div class="col-span-6 grid-cols-3 gap-2 mx-4 hidden md:grid lg:mx-0">
+      <div class="bg-gray-200 p-4">
+        <div class="text-xs"><%= t(".investment_status") %></div>
+        <div class="text-lg"><%= property_status %></div>
+      </div>
+      <div class="bg-gray-200 p-4">
+        <div class="text-xs"><%= t(".property_type") %></div>
+        <div class="text-lg"><%= property_type %></div>
+      </div>
+      <div class="bg-gray-200 p-4">
+        <div class="text-xs"><%= t(".property_value") %></div>
+        <div class="text-lg"><%= property_value %></div>
+      </div>
+      <div class="bg-gray-200 p-4">
+        <div class="text-xs"><%= t(".minimum_investment") %></div>
+        <div class="text-lg"><%= minimum_investment %></div>
+      </div>
+      <div class="bg-gray-200 p-4">
+        <div class="text-xs"><%= t(".units_available") %></div>
+        <div class="text-lg"><%= units_available %></div>
+      </div>
+      <div class="bg-gray-200 p-4">
+        <div class="text-xs"><%= t(".estimated_yield") %></div>
+        <div class="text-lg"><%= estimated_yield %></div>
+      </div>
     </div>
   </div>
 </section>

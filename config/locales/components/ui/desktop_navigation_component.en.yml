@@ -1,0 +1,7 @@
+en:
+  ui:
+    desktop_navigation_component:
+      properties: Properties
+      portfolios: Portfolios
+      profile: Profile
+      logout: Logout

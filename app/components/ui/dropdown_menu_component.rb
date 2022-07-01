@@ -10,7 +10,10 @@ module Ui
     }
 
     renders_many :menu_items, ->(text:, path:, **options) do
-      link_to(text, path, **options)
+      content_tag(:li,
+        link_to(text, path, class: "p-2 px-4 inline-block", **options),
+        class: "hover:text-green-500 cursor pointer"
+      )
     end
   end
 end

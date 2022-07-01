@@ -1,12 +1,13 @@
-<section class="max-w-screen-xl mx-auto mt-20">
-  <h3 class="text-3xl font-bold"><%= t(".my_profile") %></h3>
-  <div class="mt-20">
+<section class="max-w-screen-xl mx-auto mt-10 md:mt-20">
+  <h3 class="text-3xl font-bold mx-4 lg:mx-0"><%= t(".my_profile") %></h3>
+  <p class="mx-4 mt-4 text-lg md:hidden"><%= t(".mobile_information") %></p>
+  <div class="mt-10 mx-4 md:mt-20 lg:mx-0">
     <%= form_with model: @form, scope: @form.scope, builder: BuyerApp::FormBuilder, url: {action: :update, controller: :profiles}, data: {page_reload_target: :form}, method: "put" do |f|%>
-      <div class="flex gap-x-8">
-        <div class="grid grid-cols-12 overflow-hidden rounded-l-2xl">
-          <div class="col-span-6 bg-gray-200 p-10 mr-5 text-lg text-gray-500">
-            <h4 class="text-xl font-semibold mb-5"><%= t(".basic_information") %></h4>
-            This fields are required and mandeatory if you now wha I mean  Please fill as accurately as possible.
+      <div class="grid gap-x-8 lg:grid-cols-2">
+        <div class="grid gap-4 md:grid-cols-12">
+          <div class="col-span-6 bg-gray-200 p-10 text-lg text-gray-500 rounded-l-2xl hidden md:block">
+            <h4 class="text-xl font-semibold mb-5"><%= t(".basic_information_heading") %></h4>
+            <p><%= t(".basic_information") %></p>
           </div>
           <div class="col-span-6">
             <div>
@@ -33,10 +34,10 @@
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-12 overflow-hidden rounded-l-2xl">
-          <div class="col-span-6 bg-gray-200 p-10 mr-5 text-lg text-gray-500">
-            <h4 class="text-xl font-semibold mb-5"><%= t(".address_information") %></h4>
-            This fields are required and mandeatory if you now wha I mean  Please fill as accurately as possible.
+        <div class="grid gap-4 mt-6 md:grid-cols-12 lg:mt-0">
+          <div class="col-span-6 bg-gray-200 p-10 text-lg text-gray-500 rounded-l-2xl hidden md:block">
+            <h4 class="text-xl font-semibold mb-5"><%= t(".address_information_heading") %></h4>
+            <p><%= t(".address_information") %></p>
           </div>
           <div class="col-span-6">
             <div>
@@ -65,8 +66,14 @@
           </div>
         </div>
       </div>
-      <div class="my-10 text-right">
-        <%= render Ui::PrimaryButtonComponent.new(title: t(".update_profile"), rounded: true) %>
+      <div class="my-10 md:flex md:justify-end">
+        <div>
+          <%= render Ui::PrimaryButtonComponent.new(
+            title: t(".update_profile"),
+            rounded: true,
+            full_width: true
+          ) %>
+        </div>
       </div>
     <% end %>
   </div>

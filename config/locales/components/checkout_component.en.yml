@@ -15,4 +15,5 @@ en:
     portfolio_number: "Portfolio No: %{portfolio_number}"
     price_per_unit: "%{price_per_unit} /unit"
     estimated_yield: "Estimated Yield: %{yield}%"
+    refresh_button: refresh price
     disclaimer: "Note: We will send you a mail with a copy of the Tenancy in Common agreement for you to sign immediately after payment."

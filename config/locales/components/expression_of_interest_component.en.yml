@@ -4,7 +4,7 @@ en:
     available_units: Available Units
     review_eoi: Review EOI
     review_message: You are about to submit an expression of interest for <b>%{units}</b> of <b>%{name}</b> at <b>%{unit_price}/unit</b>. This guarantees you first right of refusal to own this property when it's open for investment.
-    eoi_summary: Expected Transaction Summary
+    eoi_summary: Expected Investment
     units_to_acquire: Units to Acquire
     subtotal: Subtotal
     eoi_fee: Transaction Fee
@@ -14,4 +14,5 @@ en:
     portfolio_number: "Portfolio No: %{portfolio_number}"
     price_per_unit: "%{price_per_unit} /unit"
     estimated_yield: "Estimated Yield: %{yield}%"
+    refresh_button: refresh price
     disclaimer: "<b>Note:</b> Submitting an expression of interest does not constitute a sale or a guanrantee of ownership.<br/>We will notify you when the property is open for purchase."

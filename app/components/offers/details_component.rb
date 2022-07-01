@@ -12,13 +12,17 @@ module Offers
       offer.expression_of_interest_status?
     end
 
+    def sold_out?
+      offer.sold_out_status?
+    end
+
     def property_image_path
       cl_image_path(offer.property.image)
     end
 
     def property_image
-      tag(
-        :div,
+      content_tag(
+        :div, "",
         class: "h-96 bg-cover bg-no-repeat",
         style: "background-image: url(#{property_image_path})"
       )

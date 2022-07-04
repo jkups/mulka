@@ -13,6 +13,9 @@ application.register("dropdown-menu", DropdownMenuController)
 import FlashController from "./flash_controller.js"
 application.register("flash", FlashController)
 
+import IntlTelephoneController from "./intl_telephone_controller.ts"
+application.register("intl-telephone", IntlTelephoneController)
+
 import NumberOfUnitsController from "./number_of_units_controller.ts"
 application.register("number-of-units", NumberOfUnitsController)
 

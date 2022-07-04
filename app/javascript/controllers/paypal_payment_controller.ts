@@ -1,10 +1,12 @@
 import { Controller } from "@hotwired/stimulus";
 import { loadScript as loadPaypalScript } from "@paypal/paypal-js";
-import braintree from "braintree-web";
+import Bugsnag fom "@bugsnag/browser";
+import * as braintree from "braintree-web";
 
 export default class extends Controller {
   static targets = [
     "form",
+    "paypalButtonContainer",
     "payWithPaypalButton",
     "payWithCardButton",
     "processingPayment",
@@ -20,6 +22,7 @@ export default class extends Controller {
   };
 
   declare formTarget: HTMLFormElement;
+  declare paypalButtonContainerTarget: HTMLDivElement;
   declare payWithPaypalButtonTarget: HTMLButtonElement;
   declare payWithCardButtonTarget: HTMLButtonElement;
   declare processingPaymentTarget: HTMLDivElement;
@@ -45,6 +48,7 @@ export default class extends Controller {
   connect(): void {
     this.payWithPaypalButtonTarget.disabled = true;
     this.payWithCardButtonTarget.disabled = true;
+    this.paypalButtonContainerTarget.classList.toggle("hidden");
     this.unitsInputTarget.disabled = true;
   }
 
@@ -56,7 +60,7 @@ export default class extends Controller {
     this.createPaypalCheckout(clientInstance);
   }
 
-  createPaypalCheckout(clientInstance): void {
+  createPaypalCheckout(clientInstance: Promise<braintree.Client>): void {
     const paypalCheckout = clientInstance.then((clientInstance) => {
       return braintree.paypalCheckout.create({ client: clientInstance });
     });
@@ -64,7 +68,9 @@ export default class extends Controller {
     this.initializePaypalCheckoutInstance(paypalCheckout);
   }
 
-  initializePaypalCheckoutInstance(paypalCheckout): void {
+  initializePaypalCheckoutInstance(
+    paypalCheckout: Promise<braintree.PayPalCheckout>
+  ): void {
     const paypalCheckoutInstance = paypalCheckout.then(
       (paypalCheckoutInstance) => {
         return paypalCheckoutInstance.loadPayPalSDK({
@@ -77,18 +83,22 @@ export default class extends Controller {
     this.renderPaypalButton(paypalCheckoutInstance);
   }
 
-  renderPaypalButton(paypalCheckoutInstance): void {
+  renderPaypalButton(
+    paypalCheckoutInstance: Promise<braintree.PayPalCheckout>
+  ): void {
+    const paypalButtonStyle = { color: "blue", height: 44 };
+
     paypalCheckoutInstance
       .then((paypalCheckoutInstance) => {
         return this.paypal_sdk
           .Buttons({
             fundingSource: this.paypal_sdk.FUNDING.PAYPAL,
-            style: { color: "blue", height: 44 },
+            style: paypalButtonStyle,
             createOrder: () => this.createOrder(paypalCheckoutInstance),
-            onApprove: (data, action) =>
-              this.handleSuccess(paypalCheckoutInstance, data, action),
-            onCancel: (data) => this.handleCancellation(data),
-            onError: (err) => this.handleFailure(err),
+            onApprove: (data: any, actions: any) =>
+              this.handleSuccess(paypalCheckoutInstance, data, actions),
+            onCancel: (data: any) => this.handleCancellation(data),
+            onError: (err: braintree.BraintreeError) => this.handleFailure(err),
           })
           .render("#paypal-button");
       })
@@ -97,21 +107,26 @@ export default class extends Controller {
         this.payWithCardButtonTarget.disabled = false;
         this.unitsInputTarget.disabled = false;
         this.spinnerTarget.classList.add("hidden");
+        this.paypalButtonContainerTarget.classList.toggle("hidden");
         this.handleMouseOver();
       });
   }
 
-  createOrder(paypalCheckoutInstance): any {
+  createOrder(paypalCheckoutInstance: braintree.PayPalCheckout): any {
     return paypalCheckoutInstance.createPayment({
       flow: "checkout",
       amount: this.trxnAmountValue,
       currency: "USD",
       intent: "capture",
       displayName: "Mulka",
-    });
+    } as braintree.PayPalCheckoutCreatePaymentOptions);
   }
 
-  handleSuccess(paypalCheckoutInstance, data, action): any {
+  handleSuccess(
+    paypalCheckoutInstance: braintree.PayPalCheckout,
+    data: any,
+    actions: any
+  ): any {
     return paypalCheckoutInstance.tokenizePayment(data).then((payload) => {
       this.processingPaymentTarget.classList.replace("hidden", "flex");
 
@@ -124,15 +139,29 @@ export default class extends Controller {
     });
   }
 
-  handleCancellation(data): void {
-    console.log("PayPal payment cancelled");
+  handleCancellation(data: any): void {
+    // handle cancellation - do nothing!
+    // returns the orderID [object Object]
   }
 
-  handleFailure(error): void {
-    console.error("PayPal error", error);
+  handleFailure(error: braintree.BraintreeError): void {
+    const toast = document.querySelector("#toast") as HTMLDivElement;
+    const flash = toast.querySelector("div") as HTMLDivElement;
+    flash.classList.remove("hidden");
+    toast.classList.remove("hidden");
+
+    setTimeout(() => {
+      flash.classList.add("hidden");
+      toast.classList.add("hidden");
+    }, 5000);
+
+    Bugsnag.notify({
+      name: error.code,
+      message: error.message,
+    });
   }
 
-  createInput(name, value): HTMLInputElement {
+  createInput(name: string, value: string): HTMLInputElement {
     const input = document.createElement("input");
     input.type = "hidden";
     input.name = `tranzaction[${name}]`;

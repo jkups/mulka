@@ -1,0 +1,5 @@
+en:
+  buyer_app:
+    tranzactions:
+      new:
+        payment_failure: Something went wrong with your payment!

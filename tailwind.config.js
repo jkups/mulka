@@ -1,4 +1,5 @@
 module.exports = {
+  important: true,
   content: [
     "./app/assets/**/*.svg",
     "./app/components/**/*.rb",
@@ -14,5 +15,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

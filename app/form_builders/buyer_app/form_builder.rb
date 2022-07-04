@@ -24,5 +24,10 @@ module BuyerApp
       options[:class] = ["form-input", options[:class]]
       super(method, options)
     end
+
+    def select(method, choices = nil, options = {}, html_options = {}, &block)
+      html_options[:class] = ["form-select", html_options[:class]]
+      super
+    end
   end
 end

@@ -1,4 +1,7 @@
-<section class="max-w-screen-xl mx-auto mt-10 md:mt-20">
+<section
+  data-controller="page-reload intl-telephone"
+  data-intl-telephone-allowed-countries-value="<%= @form.telephone_supported_countries %>"
+  class="max-w-screen-xl mx-auto mt-10 md:mt-20">
   <h3 class="text-3xl font-bold mx-4 lg:mx-0"><%= t(".my_profile") %></h3>
   <p class="mx-4 mt-4 text-lg md:hidden"><%= t(".mobile_information") %></p>
   <div class="mt-10 mx-4 md:mt-20 lg:mx-0">
@@ -12,24 +15,24 @@
           <div class="col-span-6">
             <div>
               <%= f.label :full_name, t(".full_name") %>
-              <%= f.text_field :full_name, class: "form-input", value: @form.full_name, disabled: true %>
+              <%= f.text_field :full_name, disabled: true %>
               <%= f.field_errors :full_name %>
             </div>
 
             <div class="mt-6">
               <%= f.label :preferred_name, t(".preferred_name") %>
-              <%= f.text_field :preferred_name, class: "form-input", value: @form.preferred_name %>
+              <%= f.text_field :preferred_name %>
             </div>
 
             <div class="mt-6">
               <%= f.label :email, t(".email") %>
-              <%= f.email_field :email, class: "form-input", value: @form.email %>
+              <%= f.email_field :email %>
               <%= f.field_errors :email %>
             </div>
 
             <div class="mt-6">
-              <%= f.label :mobile_number, t(".mobile_number") %>
-              <%= f.text_field :mobile_number, class: "form-input", value: @form.mobile_number %>
+              <%= f.label :visible_mobile_number, t(".mobile_number") %>
+              <%= f.text_field :visible_mobile_number, value: @form.mobile_number, data: {intl_telephone_target: "mobileNumberInput"} %>
               <%= f.field_errors :mobile_number %>
             </div>
           </div>
@@ -42,26 +45,29 @@
           <div class="col-span-6">
             <div>
               <%= f.label :address, t(".address") %>
-              <%= f.text_field :address, class: "form-input", value: @form.address %>
+              <%= f.text_field :address %>
                <%= f.field_errors :address %>
             </div>
 
             <div class="mt-6">
               <%= f.label :suburb, t(".suburb") %>
-              <%= f.text_field :suburb, class: "form-input", value: @form.suburb %>
+              <%= f.text_field :suburb %>
               <%= f.field_errors :suburb %>
             </div>
 
             <div class="mt-6">
-              <%= f.label :city, t(".city") %>
-              <%= f.text_field :city, class: "form-input", value: @form.city %>
-              <%= f.field_errors :city %>
+              <%= f.label :country_code, t(".country") %>
+              <%= f.select :country_code, @form.supported_countries_options,
+                {prompt: t(".select_country")},
+                {data: { action: "intl-telephone#setMobileNumber page-reload#refreshWithParams"}}
+              %>
+              <%= f.field_errors :country_code %>
             </div>
 
             <div class="mt-6">
-              <%= f.label :country, t(".country") %>
-              <%= f.text_field :country, class: "form-input", value: @form.country %>
-              <%= f.field_errors :country %>
+              <%= f.label :subdivision, t(".subdivision") %>
+              <%= f.select :subdivision, @form.subdivision_options %>
+              <%= f.field_errors :subdivision %>
             </div>
           </div>
         </div>

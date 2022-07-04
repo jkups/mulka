@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
-import braintree from "braintree-web";
+import Bugsnag from "@bugsnag/browser";
+import * as braintree from "braintree-web";
 
 export default class extends Controller {
   static targets = ["form", "payWithCardButton", "processingPayment"];
@@ -17,7 +18,7 @@ export default class extends Controller {
   declare braintreeAuthorizationValue: string;
   declare braintreePrefixValue: string;
   declare trxnAmountValue: string;
-  declare hostedFields;
+  declare hostedFields: braintree.HostedFields;
 
   connect(): void {
     this.payWithCardButtonTarget.disabled = true;
@@ -32,7 +33,7 @@ export default class extends Controller {
     this.createHostedFields(clientInstance);
   }
 
-  createHostedFields(clientInstance): void {
+  createHostedFields(clientInstance: Promise<braintree.Client>): void {
     const createdHostedFields = clientInstance.then((client) => {
       return braintree.hostedFields.create({
         client: client,
@@ -44,11 +45,13 @@ export default class extends Controller {
     this.hostedFieldsEventListeners(createdHostedFields);
   }
 
-  hostedFieldsEventListeners(createdHostedFields): void {
+  hostedFieldsEventListeners(
+    createdHostedFields: Promise<braintree.HostedFields>
+  ): void {
     createdHostedFields
       .then((hostedFields) => {
         this.hostedFields = hostedFields;
-        this.payWithCardButtonTarget.disabled = false;
+        // this.payWithCardButtonTarget.disabled = false;
 
         hostedFields.on("empty", (event) => this.onEmpty(event));
         hostedFields.on("validityChange", (event) =>
@@ -61,33 +64,43 @@ export default class extends Controller {
       .catch((error) => this.handleFieldErrors(error));
   }
 
-  onEmpty(event): void {}
-
-  onValidityChange(event): void {}
-
-  onCardTypeChange(event): void {}
-
-  handleFieldErrors(error): void {}
-
-  processPayment(event): void {
-    event.preventDefault();
-
-    const state = this.hostedFields.getState();
-    const isFieldsValid = Object.keys(state.fields).every(
-      (key) => state.fields[key].isValid
-    );
-
-    if (isFieldsValid) {
-      this.processingPaymentTarget.classList.replace("hidden", "flex");
-
-      this.hostedFields
-        .tokenize({ cardholderName: "" })
-        .then((payload) => this.handleSuccess(payload))
-        .catch((error) => this.handleFailure(error));
-    }
+  onEmpty(event: braintree.HostedFieldsEvent): void {
+    // do nothing
   }
 
-  handleSuccess(payload): void {
+  onCardTypeChange(event: braintree.HostedFieldsEvent): void {
+    // do nothing
+  }
+
+  handleFieldErrors(error: braintree.BraintreeError): void {
+    Bugsnag.notify({
+      name: error.code,
+      message: error.message,
+    });
+  }
+
+  onValidityChange(event: braintree.HostedFieldsEvent): void {
+    const isFieldsValid = Object.values(event.fields).every(
+      (field) => field.isValid
+    );
+
+    this.payWithCardButtonTarget.disabled = isFieldsValid ? false : true;
+  }
+
+  processPayment(event: Event): void {
+    event.preventDefault();
+    this.processingPaymentTarget.classList.replace("hidden", "flex");
+    const cardholderName = document.querySelector(
+      ".cardholderName"
+    ) as HTMLInputElement;
+
+    this.hostedFields
+      .tokenize({ cardholderName: cardholderName.value })
+      .then((payload) => this.handleSuccess(payload))
+      .catch((error) => this.handleFailure(error));
+  }
+
+  handleSuccess(payload: braintree.HostedFieldsTokenizePayload): void {
     const nonceValue = `${this.braintreePrefixValue}${payload.nonce}`;
     const nonceInput = this.createInput("nonce", nonceValue);
     const paymentMethodInput = this.createInput("payment_method", "card");
@@ -96,12 +109,25 @@ export default class extends Controller {
     this.formTarget.submit();
   }
 
-  handleFailure(error): void {
+  handleFailure(error: braintree.BraintreeError): void {
     this.processingPaymentTarget.classList.replace("flex", "hidden");
-    console.error("Card error", error);
+    const toast = document.querySelector("#toast") as HTMLDivElement;
+    const flash = toast.querySelector("div") as HTMLDivElement;
+    flash.classList.remove("hidden");
+    toast.classList.remove("hidden");
+
+    setTimeout(() => {
+      flash.classList.add("hidden");
+      toast.classList.add("hidden");
+    }, 5000);
+
+    Bugsnag.notify({
+      name: error.code,
+      message: error.message,
+    });
   }
 
-  createInput(name, value): HTMLInputElement {
+  createInput(name: string, value: string): HTMLInputElement {
     const input = document.createElement("input");
     input.type = "hidden";
     input.name = `tranzaction[${name}]`;
@@ -110,7 +136,7 @@ export default class extends Controller {
     return input;
   }
 
-  fieldsConfig() {
+  fieldsConfig(): braintree.HostedFieldFieldOptions {
     return {
       cardholderName: { selector: "#cardholder-name" },
       number: {
@@ -122,7 +148,7 @@ export default class extends Controller {
     };
   }
 
-  stylesConfig() {
+  stylesConfig(): any {
     return {
       input: { "font-size": "18px", color: "#15b881" },
       "input.invalid": { color: "#991b1b" },

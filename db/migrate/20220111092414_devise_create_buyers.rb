@@ -8,8 +8,8 @@ class DeviseCreateBuyers < ActiveRecord::Migration[7.0]
       t.string :mobile_number
       t.string :address
       t.string :suburb
-      t.string :city
-      t.string :country
+      t.string :subdivision
+      t.string :country_code
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

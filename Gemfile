@@ -9,11 +9,10 @@ gem "rails", "~> 7.0.0"
 gem "apexcharts"
 gem "braintree", "~> 4.5"
 gem "cloudinary", "~> 1.21"
-gem "countries", "~> 5.1"
+gem "countries", "~> 5.1", require: "countries/global"
 gem "devise", "~> 4.8"
 gem "dry-monads", "~> 1.4"
 gem "dry-transaction", "~> 0.13.3"
-gem "faker", "~> 2.19"
 gem "functionable-json"
 gem "good_job", "~> 2.9"
 gem "inline_svg"
@@ -73,6 +72,7 @@ group :development, :test do
   gem "pry-rails", "~> 0.3.9"
   gem "factory_bot_rails", "~> 6.2"
   gem "strong_migrations", "~> 0.7.9"
+  gem "faker", "~> 2.19"
 end
 
 group :development do

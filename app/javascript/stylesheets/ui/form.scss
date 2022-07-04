@@ -1,5 +1,6 @@
+.form-select,
 .form-input {
-  @apply w-full h-10 text-xl mt-1 border-b border-green-500 ring-green-500 focus:outline-none;
+  @apply w-full h-12 text-xl mt-1 px-0 border-b border-t-0 border-x-0 border-green-500 focus:border-green-500 focus:ring-0 focus:outline-0;
 
   &:disabled {
     @apply bg-white border-gray-200;

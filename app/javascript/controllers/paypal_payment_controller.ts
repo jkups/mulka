@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 import { loadScript as loadPaypalScript } from "@paypal/paypal-js";
-import Bugsnag fom "@bugsnag/browser";
+import Bugsnag from "@bugsnag/browser";
 import * as braintree from "braintree-web";
 
 export default class extends Controller {

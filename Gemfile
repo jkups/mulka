@@ -8,6 +8,7 @@ gem "rails", "~> 7.0.0"
 
 gem "apexcharts"
 gem "braintree", "~> 4.5"
+gem "bugsnag", "~> 6.24"
 gem "cloudinary", "~> 1.21"
 gem "countries", "~> 5.1", require: "countries/global"
 gem "devise", "~> 4.8"

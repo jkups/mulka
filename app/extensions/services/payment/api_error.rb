@@ -1,9 +1,9 @@
 module Services
-  module SendGrid
+  module Payment
     class ApiError < StandardError
       class << self
-        def from_send_grid_ruby(e)
-          puts e
+        def from_braintree_ruby(e)
+          Bugsnag.notify(e)
         end
       end
     end

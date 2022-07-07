@@ -1,6 +1,7 @@
 <head>
   <title>Mulka</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= tag(:meta, name: "viewport", content: "width=device-width,initial-scale=1") %>
+  <%= tag(:meta, name: "bugsnagApiKey", content: ENV["BUGSNAG_API_KEY"]) %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 

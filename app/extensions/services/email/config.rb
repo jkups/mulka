@@ -1,5 +1,5 @@
 module Services
-  module SendGrid
+  module Email
     class Config
       class << self
         def params

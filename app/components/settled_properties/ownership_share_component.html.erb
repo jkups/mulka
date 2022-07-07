@@ -1,11 +1,11 @@
-<div class="col-span-3 border border-gray-200 p-4 rounded-2xl">
+<div class="col-span-full border border-gray-200 p-4 rounded-2xl md:col-span-6 lg:col-span-3">
   <div class="text-sm"><%== t(".percentage_ownership", subheading: content_tag(:div, t(".ownership"), class: "text-lg font-semibold text-green-500")) %></div>
   <div class="text-3xl font-semibold mt-2">
     <%= radial_bar_chart(series, options) %>
   </div>
 </div>
 
-<div class="col-span-3 grid grid-rows-3 gap-y-4">
+<div class="col-span-full grid grid-rows-3 gap-4 md:col-span-6 lg:col-span-3">
   <div class="border border-gray-200 p-4 rounded-2xl">
     <div class="text-sm"><%== t(".monthly_rent", subheading: content_tag(:div, t(".rental_income"), class: "text-lg font-semibold text-green-500")) %></div>
     <div class="text-3xl font-semibold mt-2"><%= monthly_rent %></div>

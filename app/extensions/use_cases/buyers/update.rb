@@ -19,8 +19,8 @@ module UseCases
           mobile_number: form.mobile_number,
           address: form.address,
           suburb: form.suburb,
-          city: form.city,
-          country: form.country
+          subdivision: form.subdivision,
+          country_code: form.country_code
         )
 
         buyer_update_succeed ? Success(form) : Failure(form)

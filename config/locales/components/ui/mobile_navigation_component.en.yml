@@ -1,0 +1,7 @@
+en:
+  ui:
+    mobile_navigation_component:
+      properties: Properties
+      portfolios: Portfolios
+      profile: Profile
+      logout: Logout

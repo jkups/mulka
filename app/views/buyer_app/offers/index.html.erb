@@ -1,15 +1,15 @@
 <div class="bg-gray-100">
-	<div class="text-center py-24 mb-10">
-		<h2 class="text-3xl font-bold"><%= t(".title") %></h2>
-		<p class="text-lg"><%= t(".byline") %></p>
+	<div class="mx-4 text-center py-10 mb-5 md:py-24 md:mb-10 md:mx-0">
+		<h2 class="text-2xl font-bold md:text-3xl"><%= t(".title") %></h2>
+		<p class="text-base md:text-lg"><%= t(".byline") %></p>
 	</div>
 </div>
 
-<section class="max-w-screen-xl	mx-auto mb-28">
-  <div class="border-b border-gray-200 py-4 text-xl">
+<section class="mx-4 max-w-screen-xl mb-16 md:mb-28 lg:mx-auto">
+  <div class="border-b border-gray-200 py-4 text-lg md:text-xl">
     <%= @offers.size %> <%= t(".properties_listed") %>
   </div>
-  <div class="grid grid-cols-6 gap-6 my-8">
+  <div class="grid gap-6 my-8 md:grid-cols-6">
     <%= render Offers::IndexComponent.with_collection(@offers) %>
   </div>
 </section>

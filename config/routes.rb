@@ -13,10 +13,10 @@ Rails.application.routes.draw do
       resources :offers, only: %i[index show] do
         resources :tranzactions, only: %i[new create]
         resources :expression_of_interests, only: %i[new create]
-        get "tranzaction/success", to: "tranzactions#success"
-        get "tranzaction/failure", to: "tranzactions#failure"
-        get "expression_of_interest/success", to: "expression_of_interests#success"
-        get "expression_of_interest/failure", to: "expression_of_interests#failure"
+        get "tranzactions/success", to: "tranzactions#success"
+        get "tranzactions/failure", to: "tranzactions#failure"
+        get "expression_of_interests/success", to: "expression_of_interests#success"
+        get "expression_of_interests/failure", to: "expression_of_interests#failure"
       end
     end
   end

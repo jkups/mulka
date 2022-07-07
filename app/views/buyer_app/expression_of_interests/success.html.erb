@@ -1,7 +1,7 @@
-<section class="max-w-screen-xl mx-auto mt-10">
-  <div class="text-center py-24 mb-10">
-		<h2 class="text-3xl font-bold mb-2"><%= t(".heading") %></h2>
-		<p class="text-lg"><%= t(".congrats_message") %></p>
+<section class="max-w-screen-xl mx-auto md:mt-10">
+  <div class="text-center py-16 mx-4 md:py-24">
+		<h2 class="text-2xl font-bold mb-2 md:text-3xl"><%= t(".heading") %></h2>
+		<p class="text-base md:text-lg"><%= t(".congrats_message") %></p>
     <div class="mt-10">
       <%= render Ui::PrimaryLinkButtonComponent.new(
         title: t(".eoi_button"),

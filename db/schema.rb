@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
     t.string "mobile_number"
     t.string "address"
     t.string "suburb"
-    t.string "city"
-    t.string "country"
+    t.string "subdivision"
+    t.string "country_code"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

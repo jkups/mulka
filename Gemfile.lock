@@ -88,6 +88,8 @@ GEM
       rest-client (>= 2.0.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
+    countries (5.1.0)
+      sixarm_ruby_unaccent (~> 1.1)
     crass (1.0.6)
     debug (1.4.0)
       irb (>= 1.3.6)
@@ -196,6 +198,7 @@ GEM
     pg (1.2.3)
     pg_query (2.1.2)
       google-protobuf (>= 3.17.1)
+    phonelib (0.7.0)
     prosopite (1.0.6)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -294,6 +297,7 @@ GEM
     semantic_range (3.0.0)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
+    sixarm_ruby_unaccent (1.2.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -354,6 +358,7 @@ DEPENDENCIES
   braintree (~> 4.5)
   capybara
   cloudinary (~> 1.21)
+  countries (~> 5.1)
   debug
   devise (~> 4.8)
   dotenv-rails
@@ -368,6 +373,7 @@ DEPENDENCIES
   jbuilder
   pg (~> 1.1)
   pg_query (~> 2.1)
+  phonelib
   prosopite (~> 1.0)
   pry-rails (~> 0.3.9)
   puma (~> 5.0)

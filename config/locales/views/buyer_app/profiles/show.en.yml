@@ -9,8 +9,12 @@ en:
         mobile_number: Mobile Number
         address: Address
         suburb: Suburb
-        city: City
+        subdivision: State
         country: Country
+        select_country: Select a Country
         update_profile: Update Profile
-        basic_information: Basic Information
-        address_information: Residential Address
+        basic_information_heading: Basic Information
+        basic_information: We need this information so we can let you know everything going on with your property.
+        address_information_heading: Residential Address
+        address_information: We try to keep documentation to a minimum. However, some legal documents require us to state your residential address.
+        mobile_information: We need this information to let you know what's going on with your property and to state your residential address on legal documents.

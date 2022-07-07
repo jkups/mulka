@@ -1,3 +1,8 @@
-<section class="max-w-screen-xl mx-auto mt-20 mb-44">
+<%# for braintree client failure %>
+<div id="toast" class="hidden">
+  <%= render Ui::FlashComponent.new(type: :alert, message: t(".payment_failure")) %>
+</div>
+
+<section class="max-w-screen-xl mx-auto mb-16 md:mt-20 md:mb-40">
   <%= render CheckoutComponent.new(tranzaction: @form) %>
 </section>

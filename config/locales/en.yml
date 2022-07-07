@@ -33,4 +33,4 @@ en:
   time:
     formats:
       short: "%d/%m/%Y" # 25/06/2022
-      medium: "%d %B %Y" # 25 July 2022
+      medium: "%d %b %Y" # 25 Jul 2022

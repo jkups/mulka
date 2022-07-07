@@ -1,4 +1,4 @@
-<section class="max-w-screen-xl mx-auto my-10">
+<section class="max-w-screen-xl mx-auto my-10 md:my-20">
   <%= render SettledProperties::BasicDetailsComponent.new(
     property: @property
   ) %>
@@ -9,7 +9,7 @@
         settled_property: @portfolio_settled_property.settled_property
       ) %>
 
-      <div class="grid grid-cols-12 mt-4 space-x-4">
+      <div class="grid grid-cols-12 mt-4 gap-4 mx-4 lg:mx-0">
         <%= render SettledProperties::OwnershipShareComponent.new(
           portfolio_settled_property: @portfolio_settled_property,
           settled_property: @portfolio_settled_property.settled_property
@@ -25,10 +25,10 @@
       ) %>
     </div>
   <% else %>
-    <div class="border border-gray-200 my-10 p-10 rounded-2xl">
+    <div class="border border-gray-200 mx-4 p-4 my-10 rounded-2xl md:p-10 lg:mx-0">
       <h3 class="text-xl font-bold mb-2 text-yellow-600"><%= t(".empty_state_heading") %></h3>
       <p><%= t(".empty_state_description_one") %></p>
-      <p><%= t(".empty_state_description_two") %></p>
+      <p class="mt-2"><%= t(".empty_state_description_two") %></p>
     </div>
   <% end %>
 </section>

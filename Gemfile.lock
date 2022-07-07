@@ -72,6 +72,8 @@ GEM
     braintree (4.5.0)
       builder (>= 3.2.4)
       rexml (>= 3.1.9)
+    bugsnag (6.24.2)
+      concurrent-ruby (~> 1.0)
     builder (3.2.4)
     capybara (3.36.0)
       addressable
@@ -356,6 +358,7 @@ DEPENDENCIES
   apexcharts
   bootsnap
   braintree (~> 4.5)
+  bugsnag (~> 6.24)
   capybara
   cloudinary (~> 1.21)
   countries (~> 5.1)

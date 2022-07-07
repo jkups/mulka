@@ -15,6 +15,7 @@ module UseCases
         step :persist_external_reference
         step :persist_tranzaction
         step :reduce_offer_available_units
+        tee :send_investment_confirmation
 
         Accumulator = Struct.new(:form, :tranzaction, :external_reference, keyword_init: true)
 
@@ -62,7 +63,7 @@ module UseCases
           nonce_prefix = ENV["BRAINTREE_NONCE_PREFIX"]
           nonce = form.nonce.gsub(nonce_prefix, "")
 
-          client = Services::Braintree::Client.new(nonce: nonce)
+          client = Services::Payment::Client.new(nonce: nonce)
 
           client.pay(
             total_amount: form.tranzaction_grand_total,
@@ -85,6 +86,12 @@ module UseCases
 
           result = offer.update(available_units: new_available_units)
           result ? Success(data) : Failure(data)
+        end
+
+        def send_investment_confirmation(data)
+          ::BuyerApp::InvestmentConfirmationJob.perform_later(
+            tranzaction_id: data.tranzaction.id
+          )
         end
       end
     end

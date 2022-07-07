@@ -1,8 +1,10 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 // import "@hotwired/turbo-rails";
 // import "controllers";
+const metaData = document.getElementsByTagName("meta");
+
 import Bugsnag from "@bugsnag/js";
-Bugsnag.start({ apiKey: "cad6ad6d8c96a8e7591df3d8b11d4f3b" });
+Bugsnag.start({ apiKey: metaData.bugsnagApiKey.content });
 
 import Rails from "@rails/ujs";
 Rails.start();

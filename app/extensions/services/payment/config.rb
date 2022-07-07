@@ -1,5 +1,5 @@
 module Services
-  module Braintree
+  module Payment
     class Config
       class << self
         def params

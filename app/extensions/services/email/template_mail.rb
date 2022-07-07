@@ -1,13 +1,24 @@
 module Services
-  module SendGrid
-    class Mail
+  module Email
+    class TemplateMail
       class << self
-        def call(template:)
+        def call(template)
           new(
             template: template,
-            mail: ::SendGrid::Mail.new
+            mail: SendGrid::Mail.new
           ).template_to_mail
         end
+      end
+
+      def template_to_mail
+        set_mail_to
+        set_mail_from
+        set_mail_subject
+        set_mail_template_data
+        set_mail_template_id
+        set_mail_personalization
+
+        mail
       end
 
       private
@@ -17,17 +28,7 @@ module Services
       def initialize(mail:, template:)
         @template = template
         @mail = mail
-        @personalization = Personalization.new
-      end
-
-      def template_to_mail
-        set_mail_to
-        set_mail_subject
-        set_mail_template_data
-        set_mail_template_id
-        set_mail_personalization
-
-        mail
+        @personalization = SendGrid::Personalization.new
       end
 
       def set_mail_template_data
@@ -44,12 +45,16 @@ module Services
 
       def set_mail_to
         personalization.add_to(
-          Email.new(email: template.to, name: template.name)
+          SendGrid::Email.new(email: template.to, name: template.name)
         )
       end
 
+      def set_mail_from
+        mail.from = SendGrid::Email.new(email: template.from)
+      end
+
       def set_mail_personalization
-        mail.add_personalization(personlaization)
+        mail.add_personalization(personalization)
       end
     end
   end

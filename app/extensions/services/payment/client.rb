@@ -1,9 +1,9 @@
 module Services
-  module Braintree
+  module Payment
     class Client
-      def initialize(nonce:, config: Braintree::Config.params)
+      def initialize(nonce:, config: Payment::Config.params)
         @nonce = nonce
-        @client = ::Braintree::Gateway.new(**config)
+        @client = Braintree::Gateway.new(**config)
       end
 
       def pay(total_amount:, trxn_reference: nil)
@@ -13,10 +13,8 @@ module Services
           options: {submit_for_settlement: true},
           custom_fields: {trxn_reference: trxn_reference}
         )
-      rescue ::Braintree::ValidationsFailed => e
-        raise Braintree::ApiError.from_braintree_ruby(
-          e
-        )
+      rescue Braintree::ValidationsFailed => e
+        raise Payment::ApiError.from_braintree_ruby(e)
       end
 
       private

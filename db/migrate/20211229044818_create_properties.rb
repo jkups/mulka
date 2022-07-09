@@ -5,14 +5,15 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.string :address, null: false
       t.string :suburb, null: false
-      t.string :city, null: false
-      t.string :country, null: false
+      t.string :subdivision, null: false
+      t.string :country_code, null: false
       t.text :description, null: false
-      t.string :image, null: false
+      t.string :image_prefix, null: false
       t.boolean :occupied, null: false
       t.string :category, null: false
-      t.integer :classification, null: false
+      t.string :classification, null: false
       t.references :organization, null: false, foreign_key: true, type: :uuid
+      t.references :owner, null: false, foreign_key: {to_table: :sellers}, type: :uuid
 
       t.timestamps
     end

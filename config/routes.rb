@@ -21,8 +21,20 @@ Rails.application.routes.draw do
     end
   end
 
+  authenticated :seller do
+    namespace :seller_app do
+      root to: redirect("/seller_app/properties")
+      resources :properties
+      resources :offers, only: %i[index new create edit update]
+    end
+  end
+
   unauthenticated :buyer do
-    match "/*all", to: redirect("/buyers/sign_in"), via: :all
+    match "/buyer_app/*all", to: redirect("/buyers/sign_in"), via: :all
+  end
+
+  unauthenticated :seller do
+    match "/seller_app/*all", to: redirect("/sellers/sign_in"), via: :all
   end
 
   root to: redirect("/buyers/sign_in")

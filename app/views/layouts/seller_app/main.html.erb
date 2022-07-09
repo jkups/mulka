@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <%= render partial: "shared/head" %>
+  <body>
+    <div class="flex">
+      <%= render partial: "layouts/seller_app/side_bar" %>
+      <div class="w-full">
+        <%= render partial: "layouts/seller_app/top_nav" %>
+        <div class="relative">
+          <%= render partial: "shared/flash" %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

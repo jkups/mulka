@@ -1,0 +1,39 @@
+<div class="mx-4">
+  <h3 class="text-3xl font-bold mx-4 lg:mx-0"><%= t(".my_profile") %></h3>
+  <p class="mx-4 mt-4 text-lg md:hidden"><%= t(".mobile_information") %></p>
+  <div class="mt-10 mx-4 md:mt-20 lg:mx-0">
+    <%= form_with model: @form, scope: @form.scope, builder: SellerApp::FormBuilder, url: {action: :create, controller: :properties} do |f|%>
+      <div class="grid grid-cols-12 gap-x-4">
+        <div class="col-span-4 space-y-8">
+          <div>
+            <%= f.label :name, t(".name") %>
+            <%= f.text_field :name %>
+            <%= f.field_errors :name %>
+          </div>
+          <div>
+            <%= f.label :category, t(".category") %>
+            <%= f.select :category, @form.category_options, prompt: "Select a category" %>
+            <%= f.field_errors :category %>
+          </div>
+          <div>
+            <%= f.label :classification, t(".classification") %>
+            <%= f.select :classification, @form.classification_options, prompt: "Select a classification" %>
+            <%= f.field_errors :classification %>
+          </div>
+          <div>
+            <%= f.label :occupied, t(".occupied") %>
+            <%= f.select :occupied, @form.yes_no_options, prompt: "Select an option" %>
+            <%= f.field_errors :occupied %>
+          </div>
+        </div>
+        <div class="col-span-8">
+          <div>
+            <%= f.label :description, t(".name") %>
+            <%= f.text_field :name %>
+            <%= f.field_errors :name %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

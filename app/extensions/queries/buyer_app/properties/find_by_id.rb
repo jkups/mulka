@@ -1,6 +1,6 @@
 module Queries
   module BuyerApp
-    module Property
+    module Properties
       class FindById
         include QueryBase
 
@@ -9,7 +9,7 @@ module Queries
         end
 
         def query
-          Properties::Property.find_by!(id: property_id)
+          ::Properties::Property.find_by!(id: property_id)
         end
 
         private

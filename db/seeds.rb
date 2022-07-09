@@ -31,6 +31,16 @@ organization = Organizations::Organization.create!(
 )
 p "organization was successfully created"
 
+seller = Seller.create!(
+  full_name: "Honey Raymond",
+  email: "honey@example.com",
+  organization: organization,
+  password: "password",
+  password_confirmation: "password"
+)
+p "seller was successfully created"
+
+
 portfolio = Portfolios::Portfolio.create!(
   name: "Default",
   number: Faker::Number.number(digits: 8),
@@ -74,14 +84,15 @@ end
     name: Faker::Restaurant.name,
     address: Faker::Address.full_address,
     suburb: Faker::Address.zip_code,
-    city: Faker::Address.city,
-    country: Faker::Address.country,
+    subdivision: Faker::Address.city,
+    country_code: "AU",
     description: Faker::Restaurant.description,
-    image: PROPERTY_IMAGE[idx],
+    image_prefix: PROPERTY_IMAGE[idx],
     occupied: false,
-    category: "Town House",
-    classification: Properties::Property.classifications.fetch(:newly_built),
-    organization: organization
+    category: Properties::Property::CATEGORIES.fetch(:town_house),
+    classification: Properties::Property::CLASSIFICATIONS.fetch(:newly_built),
+    organization: organization,
+    owner: seller
   )
 
   generate_property_features(property)
@@ -119,14 +130,15 @@ property_to_be_settled = Properties::Property.create!(
   name: Faker::Restaurant.name,
   address: Faker::Address.full_address,
   suburb: Faker::Address.zip_code,
-  city: Faker::Address.city,
-  country: Faker::Address.country,
+  subdivision: Faker::Address.city,
+  country_code: "AU",
   description: Faker::Restaurant.description,
-  image: "vyi5xafgrugdtuduswio",
+  image_prefix: "vyi5xafgrugdtuduswio",
   occupied: false,
-  category: "House",
-  classification: Properties::Property.classifications.fetch(:newly_built),
-  organization: organization
+  category: Properties::Property::CATEGORIES.fetch(:house),
+  classification: Properties::Property::CLASSIFICATIONS.fetch(:newly_built),
+  organization: organization,
+  owner: seller
 )
 
 generate_property_features(property_to_be_settled)
@@ -206,14 +218,15 @@ eoi_property = Properties::Property.create!(
   name: Faker::Restaurant.name,
   address: Faker::Address.full_address,
   suburb: Faker::Address.zip_code,
-  city: Faker::Address.city,
-  country: Faker::Address.country,
+  subdivision: Faker::Address.city,
+  country_code: "AU",
   description: Faker::Restaurant.description,
-  image: "jlsvt4sms9ymprcrljjy",
+  image_prefix: "jlsvt4sms9ymprcrljjy",
   occupied: false,
-  category: "House",
-  classification: Properties::Property.classifications.fetch(:newly_built),
-  organization: organization
+  category: Properties::Property::CATEGORIES.fetch(:house),
+  classification: Properties::Property::CLASSIFICATIONS.fetch(:newly_built),
+  organization: organization,
+  owner: seller
 )
 
 generate_property_features(eoi_property)

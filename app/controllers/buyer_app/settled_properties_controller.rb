@@ -6,7 +6,7 @@ module BuyerApp
         property_id: params[:id]
       )
 
-      @property = Queries::BuyerApp::Property::FindById.perform(property_id: params[:id])
+      @property = Queries::BuyerApp::Properties::FindById.perform(property_id: params[:id])
     end
   end
 end

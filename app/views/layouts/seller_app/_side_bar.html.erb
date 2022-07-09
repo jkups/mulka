@@ -1,0 +1,11 @@
+<div class="h-screen bg-green-200 text-xl font-semibold w-52 divide-y divide-green-300 text-green-800 sticky top-0">
+  <div class="p-4 hover:bg-green-400"></div>
+  <%= link_to seller_app_properties_path, class: "block p-4 space-x-2 hover:bg-green-300" do %>
+    <i class="fas fa-home"></i>
+    <%= t(".properties") %>
+  <% end %>
+  <%= link_to seller_app_offers_path, class: "block p-4 space-x-2 hover:bg-green-300" do %>
+    <i class="fas fa-bullhorn"></i>
+    <%= t(".offers") %>
+  <% end %>
+</div>

@@ -154,17 +154,19 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
     t.string "name", null: false
     t.string "address", null: false
     t.string "suburb", null: false
-    t.string "city", null: false
-    t.string "country", null: false
+    t.string "subdivision", null: false
+    t.string "country_code", null: false
     t.text "description", null: false
-    t.string "image", null: false
+    t.string "image_prefix", null: false
     t.boolean "occupied", null: false
     t.string "category", null: false
-    t.integer "classification", null: false
+    t.string "classification", null: false
     t.uuid "organization_id", null: false
+    t.uuid "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organization_id"], name: "index_properties_on_organization_id"
+    t.index ["owner_id"], name: "index_properties_on_owner_id"
   end
 
   create_table "property_expenses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -270,6 +272,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
   add_foreign_key "portfolio_settled_properties", "settled_properties"
   add_foreign_key "portfolios", "buyers"
   add_foreign_key "properties", "organizations"
+  add_foreign_key "properties", "sellers", column: "owner_id"
   add_foreign_key "property_expenses", "settled_properties"
   add_foreign_key "property_features", "properties"
   add_foreign_key "property_rents", "settled_properties"

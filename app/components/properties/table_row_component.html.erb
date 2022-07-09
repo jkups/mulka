@@ -1,0 +1,14 @@
+<ul class="flex odd:bg-white even:bg-gray-100">
+  <li class="p-4 w-1/12">
+    <%= property_thumbnail %>
+  </li>
+  <li class="p-4 w-2/12"><%= property_name %></li>
+  <li class="p-4 w-4/12"><%= property_address %></li>
+  <li class="p-4 w-2/12"><%= property_category %></li>
+  <li class="p-4 w-2/12">
+    <span class="inline-block px-2 py-1 rounded-full text-xs font-semibold <%= offer_status_color %>">
+      <%= property_offer_status %>
+    </span>
+  </li>
+  <li class="p-4 w-1/12 underline"><%= view_property %></li>
+</ul>

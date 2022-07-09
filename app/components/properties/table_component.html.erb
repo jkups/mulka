@@ -1,0 +1,11 @@
+<ul class="flex bg-gray-200 p4 divide-x divide-gray-300 font-semibold sticky top-14 shadow">
+  <li class="p-4 w-1/12"></li>
+  <li class="p-4 w-2/12"><%= t(".property_name_column_heading") %></li>
+  <li class="p-4 w-4/12"><%= t(".property_address_column_heading") %></li>
+  <li class="p-4 w-2/12"><%= t(".category_column_heading") %></li>
+  <li class="p-4 w-2/12"><%= t(".offerred_column_heading") %></li>
+  <li class="p-4 w-1/12"></li>
+</ul>
+<div class="overflow-hidden">
+  <%= render Properties::TableRowComponent.with_collection(properties) %>
+</div>

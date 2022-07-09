@@ -3,7 +3,7 @@ module Queries
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def perform(args)
+      def perform(args = {})
         new(**args).query
       end
     end

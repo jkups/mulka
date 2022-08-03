@@ -1,0 +1,159 @@
+<script type="text/javascript" src="<%= Services::Google::MapsApi.generate_url(libraries: ["places"]) %>">
+</script>
+<div
+  class="mx-4"
+  data-controller="toggle-switch google-places-autocomplete file-upload"
+  data-file-upload-pid-value="<%= @form.pid %>"
+  data-file-upload-cloudname-value="<%= @form.file_upload_data[:cloudname] %>"
+  data-file-upload-apikey-value="<%= @form.file_upload_data[:apikey] %>"
+  data-file-upload-folder-value="<%= @form.file_upload_data[:folder] %>"
+  data-file-upload-timestamp-value="<%= @form.file_upload_data[:timestamp] %>"
+  data-file-upload-signature-value="<%= @form.file_upload_data[:signature] %>"
+>
+  <div class="my-10 mx-4 md:mt-20 lg:mx-0">
+    <%= form_with model: @form, scope: @form.scope, builder: SellerApp::FormBuilder, data: {file_upload_target: :form}, url: {action: :update, controller: :properties}, method: "put" do |f|%>
+      <%= f.hidden_field :pid %>
+
+      <div class="py-12 border-t border-gray-200">
+        <div class="grid grid-cols-12 gap-4">
+          <div class="col-span-4">
+            <h3 class="text-xl font-bold mx-4 lg:mx-0"><%= t(".property_basic_info") %></h3>
+          </div>
+          <div class="col-span-8">
+            <div class="grid grid-cols-3 gap-8">
+              <div>
+                <%= f.label :name, t(".name") %>
+                <%= f.text_field :name %>
+                <%= f.field_errors :name %>
+              </div>
+              <div>
+                <%= f.label :category, t(".category") %>
+                <%= f.select :category, @form.category_options, prompt: "Select a category" %>
+                <%= f.field_errors :category %>
+              </div>
+              <div>
+                <%= f.label :classification, t(".classification") %>
+                <%= f.select :classification, @form.classification_options, prompt: "Select a classification" %>
+                <%= f.field_errors :classification %>
+              </div>
+              <div>
+                <%= f.label :occupied, t(".occupied") %>
+                <%= f.select :occupied, @form.yes_no_options, prompt: "Select an option" %>
+                <%= f.field_errors :occupied %>
+              </div>
+              <div>
+                <%= f.label :bed, t(".bed") %>
+                <%= f.number_field :bed, min: 1, max: 10, value: "1", oninput: "this.value=(parseInt(this.value))" %>
+                <%= f.field_errors :bed %>
+              </div>
+              <div>
+                <%= f.label :bath, t(".bath") %>
+                <%= f.number_field :bath, min: 1, max: 10, value: "1", oninput: "this.value=(parseInt(this.value))" %>
+                <%= f.field_errors :bath %>
+              </div>
+              <div>
+                <%= f.label :parking, t(".parking") %>
+                <%= f.number_field :parking, min: 0, max: 5, value: "1", oninput: "this.value=(parseInt(this.value))" %>
+                <%= f.field_errors :parking %>
+              </div>
+              <div>
+                <%= f.label :plot_size, t(".plot_size") %>
+                <%= f.number_field :plot_size, min: 1 %>
+                <%= f.field_errors :plot_size %>
+              </div>
+              <div>
+                <%= f.label :floor_size, t(".floor_size") %>
+                <%= f.number_field :floor_size, min: 1 %>
+                <%= f.field_errors :floor_size %>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <div>
+                <%= f.label :autocomplete, t(".address") %>
+                <%= f.text_field :autocomplete, placeholder: "Start typing the address", value: @form.property_address,
+                  data: {
+                    action: "focus->google-places-autocomplete#geolocate",
+                    google_places_autocomplete_target: "autoComplete"
+                  }
+                %>
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-x-2 text-xs text-gray-500 mt-2">
+              <span>Manually fill out the property address</span>
+              <%= render Ui::ToggleSwitchComponent.new %>
+            </div>
+            <div class="mt-8 space-y-8 hidden" data-toggle-switch-target="toggleable"> <!-- hide on load-->
+              <div class="grid grid-cols-2 gap-8">
+                <div>
+                  <%= f.label :address, t(".street_address") %>
+                  <%= f.text_field :address, data: { google_places_autocomplete_target: "streetAddress" } %>
+                  <%= f.field_errors :address %>
+                </div>
+                <div>
+                  <%= f.label :suburb, t(".suburb") %>
+                  <%= f.text_field :suburb, data: { google_places_autocomplete_target: "suburb" } %>
+                  <%= f.field_errors :suburb %>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-8">
+                <div class="mt-6">
+                  <%= f.label :subdivision, t(".subdivision") %>
+                  <%= f.select :subdivision, @form.subdivision_options,
+                    {prompt: t(".select_state")},
+                    data: {google_places_autocomplete_target: "subdivision"}
+                  %>
+                  <%= f.field_errors :subdivision %>
+                </div>
+                <div class="mt-6">
+                  <%= f.label :country_code, t(".country") %>
+                  <%= f.select :country_code, @form.supported_countries_options,
+                    {prompt: t(".select_country")},
+                    data: {google_places_autocomplete_target: "country"}
+                  %>
+                  <%= f.field_errors :country_code %>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="mt-10 py-12 border-t border-gray-200">
+        <div class="grid grid-cols-12 gap-4">
+          <div class="col-span-4">
+            <h3 class="text-xl font-bold mx-4 lg:mx-0"><%= t(".property_description") %></h3>
+          </div>
+          <div class="col-span-8">
+            <div class="mt-2">
+              <%= f.rich_text_area :description, placeholder: "Start here", class: "border-gray-400" %>
+              <%= f.field_errors :description %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 py-12 border-t border-gray-200">
+        <%= f.hidden_field :images, data: {file_upload_target: "images"} %>
+        <%= f.hidden_field :delete_images, data: {file_upload_target: "deleteImages"} %>
+        <div class="grid grid-cols-12 gap-4">
+          <div class="col-span-4">
+            <h3 class="text-xl font-bold mx-4 lg:mx-0"><%= t(".upload_images") %></h3>
+          </div>
+          <div class="col-span-8">
+            <div class="mt-2 border border-dashed border-gray-400 dropzone" data-file-upload-target="upload">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-right">
+        <%= render Ui::PrimaryButtonComponent.new(
+          title: t(".update"),
+          rounded: true,
+          data: { action: "file-upload#submit"}
+        ) %>
+      </div>
+    <% end %>
+  </div>
+</div>

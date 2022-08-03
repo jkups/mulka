@@ -11,10 +11,20 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    buyer_app_portfolios_path
+    case resource
+    when Buyer then buyer_app_portfolios_path
+    when Seller then seller_app_properties_path
+    else
+      root_path
+    end
   end
 
   def after_sign_out_path_for(resource)
-    root_path
+    case resource
+    when :buyer then new_buyer_session_path
+    when :seller then new_seller_session_path
+    else
+      root_path
+    end
   end
 end

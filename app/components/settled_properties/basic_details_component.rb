@@ -12,7 +12,7 @@ module SettledProperties
     attr_reader :property
 
     def property_image_url
-      cl_image_path(property.image, width: THUMBNAIL_SIZE, crop: "fill")
+      cl_image_path(property.images.first, width: THUMBNAIL_SIZE, crop: "fill")
     end
 
     def property_image

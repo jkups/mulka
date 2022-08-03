@@ -1,5 +1,5 @@
 .btn {
-  @apply px-6 py-2 text-xl font-semibold;
+  @apply px-6 py-2 font-semibold;
 
   &:disabled {
     @apply bg-gray-300 cursor-not-allowed;
@@ -8,6 +8,22 @@
       @apply bg-gray-300;
     }
   }
+}
+
+.btn-xs {
+  @apply text-base;
+}
+
+.btn-sm {
+  @apply text-lg;
+}
+
+.btn-md {
+  @apply text-xl;
+}
+
+.btn-lg {
+  @apply text-2xl;
 }
 
 .primary {

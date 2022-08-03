@@ -1,0 +1,6 @@
+en:
+  sellers:
+    sessions:
+      new:
+        login: Log In
+        login_heading: Log into your account.

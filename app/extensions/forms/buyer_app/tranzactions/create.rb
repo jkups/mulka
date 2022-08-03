@@ -47,7 +47,7 @@ module Forms
               offer: offer,
               portfolio: buyer.portfolios.current,
               name: offer.property.name,
-              image: offer.property.image,
+              image: offer.property.images.first,
               price: offer.price,
               minimum_units: offer.minimum_units,
               number_of_units: number_of_units,

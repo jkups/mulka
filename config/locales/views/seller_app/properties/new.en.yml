@@ -1,0 +1,21 @@
+en:
+  seller_app:
+    properties:
+      new:
+        name: Property Name
+        category: Category
+        classification: Classification
+        occupied: Curretly Occupied?
+        bed: Number of Beds
+        bath: Number of Baths
+        parking: Number of Car Park
+        plot_size: Plot Size
+        floor_size: Floor Size
+        property_description: Description
+        property_basic_info: Basic Information
+        address: Physical Address
+        street_address: Street Address
+        country: Country
+        subdivision: State
+        select_country: Select country
+        select_state: Select state

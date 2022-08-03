@@ -1,23 +1,27 @@
 module Ui
   class PrimaryLinkButtonComponent < ViewComponent::Base
-    DEFAULT_LINK_BUTTON_CLASS = ["btn primary"]
+    DEFAULT_LINK_BUTTON_CLASS = ["btn primary"].freeze
+    BUTTON_SIZE = {xs: "btn-xs", sm: "btn-sm", md: "btn-md", lg: "btn-lg"}.freeze
     private_constant :DEFAULT_LINK_BUTTON_CLASS
 
-    def initialize(title:, href:, full_width: false, rounded: false)
+    def initialize(title:, href:, full_width: false, rounded: false, size: :md)
       @title = title
       @href = href
       @full_width = full_width
       @rounded = rounded
+      @size = size
     end
 
     private
 
-    attr_reader :title, :href, :full_width, :rounded
+    attr_reader :title, :href, :full_width, :rounded, :size
 
     def button_class
-      DEFAULT_LINK_BUTTON_CLASS << " w-full" if full_width.present?
-      DEFAULT_LINK_BUTTON_CLASS << " rounded-full" if rounded.present?
-      DEFAULT_LINK_BUTTON_CLASS.join
+      button_class = DEFAULT_LINK_BUTTON_CLASS.dup
+      button_class << "w-full" if full_width.present?
+      button_class << "rounded-full" if rounded.present?
+      button_class << BUTTON_SIZE.fetch(size)
+      button_class.join(" ")
     end
   end
 end

@@ -10,11 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_23_080700) do
+ActiveRecord::Schema.define(version: 2022_07_09_234655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
 
   create_table "admins", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "full_name", null: false
@@ -154,17 +192,18 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
     t.string "name", null: false
     t.string "address", null: false
     t.string "suburb", null: false
-    t.string "city", null: false
-    t.string "country", null: false
-    t.text "description", null: false
-    t.string "image", null: false
+    t.string "subdivision", null: false
+    t.string "country_code", null: false
+    t.text "images", null: false
     t.boolean "occupied", null: false
     t.string "category", null: false
-    t.integer "classification", null: false
+    t.string "classification", null: false
     t.uuid "organization_id", null: false
+    t.uuid "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organization_id"], name: "index_properties_on_organization_id"
+    t.index ["owner_id"], name: "index_properties_on_owner_id"
   end
 
   create_table "property_expenses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -262,6 +301,8 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
     t.index ["portfolio_id"], name: "index_tranzactions_on_portfolio_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "expression_of_interests", "buyers"
   add_foreign_key "expression_of_interests", "offers"
   add_foreign_key "offers", "properties"
@@ -270,6 +311,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080700) do
   add_foreign_key "portfolio_settled_properties", "settled_properties"
   add_foreign_key "portfolios", "buyers"
   add_foreign_key "properties", "organizations"
+  add_foreign_key "properties", "sellers", column: "owner_id"
   add_foreign_key "property_expenses", "settled_properties"
   add_foreign_key "property_features", "properties"
   add_foreign_key "property_rents", "settled_properties"

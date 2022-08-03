@@ -10,8 +10,14 @@ application.register("card-payment", CardPaymentController)
 import DropdownMenuController from "./dropdown_menu_controller.ts"
 application.register("dropdown-menu", DropdownMenuController)
 
+import FileUploadController from "./file_upload_controller.ts"
+application.register("file-upload", FileUploadController)
+
 import FlashController from "./flash_controller.js"
 application.register("flash", FlashController)
+
+import GooglePlacesAutocompleteController from "./google_places_autocomplete_controller.ts"
+application.register("google-places-autocomplete", GooglePlacesAutocompleteController)
 
 import IntlTelephoneController from "./intl_telephone_controller.ts"
 application.register("intl-telephone", IntlTelephoneController)

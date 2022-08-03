@@ -1,0 +1,7 @@
+en:
+  properties:
+    table_component:
+      property_name_column_heading: Name
+      property_address_column_heading: Address
+      category_column_heading: Category
+      offerred_column_heading: Offer Status

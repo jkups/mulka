@@ -61,7 +61,7 @@ module Calculator
           portfolio_id: portfolio.id,
           property_id: offer.property_id,
           property_name: offer.property.name,
-          property_image: offer.property.image_prefix,
+          property_image: offer.property.images.first,
           entries: tranzactions,
           **prepare_subtotals(tranzactions)
         )

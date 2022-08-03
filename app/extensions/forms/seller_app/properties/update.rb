@@ -1,7 +1,7 @@
 module Forms
   module SellerApp
     module Properties
-      class Create
+      class Update
         include ActiveModel::Model
 
         attr_reader :pid
@@ -21,12 +21,13 @@ module Forms
         attr_reader :parking
         attr_reader :plot_size
         attr_reader :floor_size
+        attr_reader :property
         attr_reader :owner
         attr_reader :organization
 
         validates_presence_of :pid,
-          :description,
           :name,
+          :description,
           :images,
           :occupied,
           :category,
@@ -40,6 +41,7 @@ module Forms
           :parking,
           :plot_size,
           :floor_size,
+          :property,
           :owner,
           :organization
 
@@ -52,11 +54,18 @@ module Forms
           end
 
           def from_params(params:, owner:)
-            kwargs = params[scope].present? ? scoped_attributes(params[scope]) : default_attributes
-            new(**kwargs.merge(owner: owner, organization: owner.organization))
+            property = Queries::SellerApp::Properties::FindByOwnerAndId.perform(
+              property_id: params[:id],
+              owner: owner
+            )
+
+            kwargs = params[scope].present? ?
+              scoped_attributes(params[scope], property) : default_attributes(property)
+
+            new(**kwargs.merge(organization: owner.organization))
           end
 
-          def scoped_attributes(attributes)
+          def scoped_attributes(attributes, property)
             {
               pid: attributes[:pid],
               name: attributes[:name],
@@ -74,29 +83,33 @@ module Forms
               bath: attributes[:bath],
               parking: attributes[:parking],
               plot_size: attributes[:plot_size],
-              floor_size: attributes[:floor_size]
+              floor_size: attributes[:floor_size],
+              property: property,
+              owner: property.owner
             }
           end
 
-          def default_attributes
+          def default_attributes(property)
             {
-              pid: SecureRandom.hex(8),
-              name: nil,
-              description: nil,
-              images: nil,
+              pid: property.pid,
+              name: property.name,
+              description: property.description,
+              images: property.images,
               delete_images: nil,
-              occupied: nil,
-              category: nil,
-              classification: nil,
-              address: nil,
-              suburb: nil,
-              subdivision: nil,
-              country_code: nil,
-              bed: nil,
-              bath: nil,
-              parking: nil,
-              plot_size: nil,
-              floor_size: nil
+              occupied: property.occupied,
+              category: property.category,
+              classification: property.classification,
+              address: property.address,
+              suburb: property.suburb,
+              subdivision: property.subdivision,
+              country_code: property.country_code,
+              bed: property.property_feature.bed,
+              bath: property.property_feature.bath,
+              parking: property.property_feature.parking,
+              plot_size: property.property_feature.plot_size,
+              floor_size: property.property_feature.floor_size,
+              property: property,
+              owner: property.owner
             }
           end
         end
@@ -105,7 +118,7 @@ module Forms
           self.class.scope
         end
 
-        def initialize(pid:, name:, description:, images:, delete_images:, occupied:, category:, classification:, address:, suburb:, subdivision:, country_code:, owner:, organization:, bed:, bath:, parking:, plot_size:, floor_size:)
+        def initialize(pid:, name:, description:, organization:, images:, delete_images:, occupied:, category:, classification:, address:, suburb:, subdivision:, country_code:, bed:, bath:, parking:, plot_size:, floor_size:, property:, owner:)
           @pid = pid
           @name = name
           @description = description
@@ -123,6 +136,7 @@ module Forms
           @parking = parking
           @plot_size = plot_size
           @floor_size = floor_size
+          @property = property
           @owner = owner
           @organization = organization
         end
@@ -163,6 +177,10 @@ module Forms
           @upload_data ||= Services::Cloudinary::UploadApi.signed_upload(
             organization: organization
           )
+        end
+
+        def property_address
+          "#{address}, #{suburb} #{subdivision}, #{country_code}"
         end
       end
     end

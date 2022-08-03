@@ -7,8 +7,7 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.string :suburb, null: false
       t.string :subdivision, null: false
       t.string :country_code, null: false
-      t.text :description, null: false
-      t.string :image_prefix, null: false
+      t.text :images, null: false
       t.boolean :occupied, null: false
       t.string :category, null: false
       t.string :classification, null: false

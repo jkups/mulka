@@ -33,28 +33,22 @@ module Properties
     end
 
     def property_offer_status
+      return "no offers" unless property.offer.present?
       property.offer.status.humanize.downcase
     end
 
     def property_thumbnail
+      first_image = property.images.split(",").first
+
       cl_image_tag(
-        property.image_prefix,
+        first_image,
         width: THUMBNAIL_SIZE[:width],
         crop: "fill"
       )
     end
 
     def offer_status_color
-      OFFER_STATUS_COLOR.fetch(property.offer.status)
-    end
-
-    def view_property
-      path = "/"
-
-      content_tag(:a, href: path, target: "_blank") do
-        i_tag = tag.i class: "fas fa-external-link-alt text-sm ml-1"
-        "view#{i_tag}".html_safe
-      end
+      OFFER_STATUS_COLOR.fetch(property.offer.status) if property.offer.present?
     end
   end
 end

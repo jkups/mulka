@@ -17,7 +17,7 @@ module Offers
     end
 
     def property_image_path
-      cl_image_path(offer.property.image_prefix)
+      cl_image_path(offer.property.images.first)
     end
 
     def property_image

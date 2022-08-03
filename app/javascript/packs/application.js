@@ -13,6 +13,8 @@ import "intl-tel-input/build/css/intlTelInput.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "stylesheets/application.scss";
 import "controllers";
+import "trix";
+import "@rails/actiontext";
 
 import ApexCharts from "apexcharts";
 window.ApexCharts = ApexCharts;

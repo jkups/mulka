@@ -1,7 +1,7 @@
 module Queries
   module SellerApp
     module Properties
-      class FindByOwnerId
+      class FindByOwner
         include QueryBase
 
         def initialize(owner:)

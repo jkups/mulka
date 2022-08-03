@@ -40,7 +40,6 @@ seller = Seller.create!(
 )
 p "seller was successfully created"
 
-
 portfolio = Portfolios::Portfolio.create!(
   name: "Default",
   number: Faker::Number.number(digits: 8),
@@ -84,10 +83,10 @@ end
     name: Faker::Restaurant.name,
     address: Faker::Address.full_address,
     suburb: Faker::Address.zip_code,
-    subdivision: Faker::Address.city,
+    subdivision: "VIC",
     country_code: "AU",
     description: Faker::Restaurant.description,
-    image_prefix: PROPERTY_IMAGE[idx],
+    images: PROPERTY_IMAGE[idx],
     occupied: false,
     category: Properties::Property::CATEGORIES.fetch(:town_house),
     classification: Properties::Property::CLASSIFICATIONS.fetch(:newly_built),
@@ -130,10 +129,10 @@ property_to_be_settled = Properties::Property.create!(
   name: Faker::Restaurant.name,
   address: Faker::Address.full_address,
   suburb: Faker::Address.zip_code,
-  subdivision: Faker::Address.city,
+  subdivision: "VIC",
   country_code: "AU",
   description: Faker::Restaurant.description,
-  image_prefix: "vyi5xafgrugdtuduswio",
+  images: "vyi5xafgrugdtuduswio",
   occupied: false,
   category: Properties::Property::CATEGORIES.fetch(:house),
   classification: Properties::Property::CLASSIFICATIONS.fetch(:newly_built),
@@ -218,10 +217,10 @@ eoi_property = Properties::Property.create!(
   name: Faker::Restaurant.name,
   address: Faker::Address.full_address,
   suburb: Faker::Address.zip_code,
-  subdivision: Faker::Address.city,
+  subdivision: "NSW",
   country_code: "AU",
   description: Faker::Restaurant.description,
-  image_prefix: "jlsvt4sms9ymprcrljjy",
+  images: "jlsvt4sms9ymprcrljjy",
   occupied: false,
   category: Properties::Property::CATEGORIES.fetch(:house),
   classification: Properties::Property::CLASSIFICATIONS.fetch(:newly_built),

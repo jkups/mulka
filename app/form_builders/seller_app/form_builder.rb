@@ -29,5 +29,10 @@ module SellerApp
       html_options[:class] = ["form-select", html_options[:class]]
       super
     end
+
+    def number_field(method, options = {})
+      options[:class] = ["form-input", options[:class]]
+      super(method, options)
+    end
   end
 end

@@ -11,7 +11,7 @@
   data-file-upload-signature-value="<%= @form.file_upload_data[:signature] %>"
 >
   <div class="my-10 mx-4 md:mt-20 lg:mx-0">
-    <%= form_with model: @form, scope: @form.scope, builder: SellerApp::FormBuilder, data: {file_upload_target: :form}, url: {action: :create, controller: :properties} do |f|%>
+    <%= form_with model: @form, scope: @form.scope, builder: SellerApp::FormBuilder, data: {file_upload_target: :form}, url: {action: :update, controller: :properties}, method: "put" do |f|%>
       <%= f.hidden_field :pid %>
 
       <div class="py-12 border-t border-gray-200">
@@ -71,7 +71,7 @@
             <div class="mt-8">
               <div>
                 <%= f.label :autocomplete, t(".address") %>
-                <%= f.text_field :autocomplete, placeholder: "Start typing the address",
+                <%= f.text_field :autocomplete, placeholder: "Start typing the address", value: @form.property_address,
                   data: {
                     action: "focus->google-places-autocomplete#geolocate",
                     google_places_autocomplete_target: "autoComplete"
@@ -149,7 +149,7 @@
 
       <div class="text-right">
         <%= render Ui::PrimaryButtonComponent.new(
-          title: t(".create"),
+          title: t(".update"),
           rounded: true,
           data: { action: "file-upload#submit"}
         ) %>

@@ -45,7 +45,7 @@ module Offers
     end
 
     def thumbnail_url
-      cl_image_path(offer.property.image_prefix)
+      cl_image_path(offer.property.images.first)
     end
 
     def thumbnail

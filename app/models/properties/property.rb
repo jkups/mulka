@@ -4,6 +4,7 @@ class Properties::Property < ApplicationRecord
   has_one :settled_property
   belongs_to :organization, class_name: Organizations::Organization.name
   belongs_to :owner, class_name: Seller.name
+  has_rich_text :description
 
   CATEGORIES = {
     apartment: "Apartment",

@@ -46,8 +46,9 @@ export default class extends Controller {
   initDropZone(): void {
     const myDropzone = new Dropzone(this.uploadTarget, {
       acceptedFiles: ".jpg,.png,.jpeg,.gif",
-      parallelUploads: 2,
       addRemoveLinks: true,
+      maxFiles: 20,
+      maxFilesize: 5242880, // 5MB in bytes
       renameFile: () => this.renameFile(),
       url: `https://api.cloudinary.com/v1_1/${this.cloudnameValue}/auto/upload`,
     });
@@ -88,8 +89,9 @@ export default class extends Controller {
   }
 
   getFileName(source): string {
-    const image = source.split("/")[1];
-    return image.split("_")[0] + "_" + image.split("_")[1];
+    const imageUrl = source.split("/")[1];
+    const imageUrlParts = imageUrl.split("_");
+    return `${imageUrlParts[0]}_${imageUrlParts[1]}`;
   }
 
   renameFile(): string {

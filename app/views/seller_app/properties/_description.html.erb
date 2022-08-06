@@ -1,0 +1,14 @@
+<div class="mt-10 py-12 border-t border-gray-200">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-4 mx-4 lg:mx-0">
+      <h3 class="text-green-700 text-xl font-bold"><%= t(".property_description") %></h3>
+      <p class="text-gray-500 mt-2 pr-40"><%= t(".description_paragraph") %></p>
+    </div>
+    <div class="col-span-8">
+      <div class="mt-2 trix-content">
+        <%= f.rich_text_area :description, placeholder: t(".start_here"), class: "border-green-500 p-4" %>
+        <%= f.field_errors :description %>
+      </div>
+    </div>
+  </div>
+</div>

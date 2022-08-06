@@ -3,7 +3,7 @@ module Offers
     OFFER_STATUS_COLOR = {
       active: "text-white bg-green-500",
       sold_out: "text-white bg-gray-500",
-      expression_of_interest: "text-white bg-amber-500"
+      expression_of_interest: "text-white bg-blue-500"
     }.with_indifferent_access.freeze
 
     THUMBNAIL_SIZE = {width: 400, height: 250}.freeze
@@ -45,7 +45,8 @@ module Offers
     end
 
     def thumbnail_url
-      cl_image_path(offer.property.images.first)
+      first_property_image = offer.property.images.split(",").first
+      cl_image_path(first_property_image)
     end
 
     def thumbnail

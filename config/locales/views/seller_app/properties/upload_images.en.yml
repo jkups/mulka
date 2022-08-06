@@ -1,0 +1,6 @@
+en:
+  seller_app:
+    properties:
+      upload_images:
+        upload_iamges: Upload Photos
+        upload_images_paragraph: Please upload high quality photos that showcase every part of the property. You can upload up to 20 photos.

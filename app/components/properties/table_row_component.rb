@@ -1,13 +1,16 @@
 module Properties
   class TableRowComponent < ViewComponent::Base
     THUMBNAIL_SIZE = {width: 80}.freeze
+    NO_OFFERS = "no offers".freeze
     OFFER_STATUS_COLOR = {
+      inactive: "text-amber-100 bg-amber-500",
       active: "text-green-100 bg-green-500",
       sold_out: "text-gray-100 bg-gray-500",
-      expression_of_interest: "text-amber-100 bg-amber-500"
+      expression_of_interest: "text-blue-100 bg-blue-500",
+      no_offers: "text-red-100 bg-red-500"
     }.with_indifferent_access.freeze
 
-    private_constant :THUMBNAIL_SIZE, :OFFER_STATUS_COLOR
+    private_constant :THUMBNAIL_SIZE, :OFFER_STATUS_COLOR, :NO_OFFERS
 
     with_collection_parameter :property
 
@@ -25,7 +28,7 @@ module Properties
     end
 
     def property_address
-      property.address
+      "#{property.address}, #{property.suburb} #{property.subdivision}, #{property.country_code}"
     end
 
     def property_category
@@ -33,7 +36,7 @@ module Properties
     end
 
     def property_offer_status
-      return "no offers" unless property.offer.present?
+      return NO_OFFERS unless property.offer.present?
       property.offer.status.humanize.downcase
     end
 
@@ -48,7 +51,8 @@ module Properties
     end
 
     def offer_status_color
-      OFFER_STATUS_COLOR.fetch(property.offer.status) if property.offer.present?
+      return OFFER_STATUS_COLOR.fetch(:no_offers) unless property.offer.present?
+      OFFER_STATUS_COLOR.fetch(property.offer.status)
     end
   end
 end

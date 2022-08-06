@@ -1,5 +1,14 @@
 <section>
-  <div class="max-w-screen-xl relative">
+  <div class="sticky top-0">
+    <div class="w-5/12 p-6 bg-white no-scrollbars absolute right-0 h-screen overflow-y-auto shadow-[-8px_8px_15px_1px_rgba(0,0,0,0.3)]">
+      <%= render Offers::PropertyImagesComponent.new do |c| %>
+        <% property_image_urls.each do |image_url| %>
+          <% c.property_image(image_url: image_url) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="max-w-screen-xl relative md:static">
     <%= property_image %>
     <h2 class="text-3xl font-bold absolute bottom-0 px-4 py-4 text-white bg-green-500/75 w-full md:hidden">
       <%= property_unit_price %>

@@ -36,3 +36,11 @@
     @apply bg-green-600;
   }
 }
+
+.secondary {
+  @apply border border-green-500 text-green-500;
+
+  &:hover {
+    @apply text-white bg-green-500;
+  }
+}

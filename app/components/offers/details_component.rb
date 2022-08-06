@@ -16,14 +16,19 @@ module Offers
       offer.sold_out_status?
     end
 
+    def property_image_urls
+      offer.property.images.split(",")
+    end
+
     def property_image_path
-      cl_image_path(offer.property.images.first)
+      first_property_image = property_image_urls.first
+      cl_image_path(first_property_image)
     end
 
     def property_image
       content_tag(
         :div, "",
-        class: "h-96 bg-cover bg-no-repeat",
+        class: "h-96 bg-cover bg-no-repeat bg-center",
         style: "background-image: url(#{property_image_path})"
       )
     end

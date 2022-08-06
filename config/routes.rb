@@ -24,8 +24,8 @@ Rails.application.routes.draw do
   authenticated :seller do
     namespace :seller_app do
       root to: redirect("/seller_app/properties")
-      resources :properties
-      resources :offers, only: %i[index new create edit update]
+      resources :properties, except: %i[show destroy]
+      resources :offers, except: %i[show destroy]
     end
   end
 

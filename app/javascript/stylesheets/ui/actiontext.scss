@@ -42,3 +42,15 @@ trix-editor {
 .trix-button-group.trix-button-group--file-tools {
   @apply hidden;
 }
+
+.trix-content h1 {
+  @apply text-lg;
+}
+
+.trix-content ul {
+  list-style: disc;
+}
+
+.trix-content ol {
+  list-style: decimal;
+}

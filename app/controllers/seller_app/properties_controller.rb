@@ -1,13 +1,9 @@
 module SellerApp
   class PropertiesController < MainController
     def index
-      # @properties = Queries::SellerApp::Properties::FindAll.perform
       @properties = Queries::SellerApp::Properties::FindByOwner.perform(
         owner: current_seller
       )
-    end
-
-    def show
     end
 
     def new

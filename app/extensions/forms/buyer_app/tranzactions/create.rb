@@ -42,12 +42,13 @@ module Forms
           def prepare_kwargs(offer, number_of_units, buyer)
             condition = number_of_units.blank? || number_of_units <= 0
             number_of_units = offer.minimum_units if condition
+            first_property_image = offer.property.images.split(",").first
 
             {
               offer: offer,
               portfolio: buyer.portfolios.current,
               name: offer.property.name,
-              image: offer.property.images.first,
+              image: first_property_image,
               price: offer.price,
               minimum_units: offer.minimum_units,
               number_of_units: number_of_units,

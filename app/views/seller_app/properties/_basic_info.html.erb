@@ -1,0 +1,106 @@
+<div class="border-t border-gray-200 py-12">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-4 mx-4 lg:mx-0">
+      <h3 class="text-green-700 text-xl font-bold"><%= t(".property_basic_info") %></h3>
+      <p class="text-gray-500 mt-2 pr-40"><%= t(".basic_info_paragraph") %></p>
+    </div>
+    <div class="col-span-8">
+      <div class="grid grid-cols-3 gap-8">
+        <div>
+          <%= f.label :name, t(".name") %>
+          <%= f.text_field :name %>
+          <%= f.field_errors :name %>
+        </div>
+        <div>
+          <%= f.label :category, t(".category") %>
+          <%= f.select :category, @form.category_options, prompt: t(".select_category") %>
+          <%= f.field_errors :category %>
+        </div>
+        <div>
+          <%= f.label :classification, t(".classification") %>
+          <%= f.select :classification, @form.classification_options, prompt: "Select a classification" %>
+          <%= f.field_errors :classification %>
+        </div>
+        <div>
+          <%= f.label :occupied, t(".occupied") %>
+          <%= f.select :occupied, @form.yes_no_options, prompt: t(".select_option") %>
+          <%= f.field_errors :occupied %>
+        </div>
+        <div>
+          <%= f.label :bed, t(".bed") %>
+          <%= f.number_field :bed, min: 1, max: 10, value: "1", oninput: "this.value=(parseInt(this.value))" %>
+          <%= f.field_errors :bed %>
+        </div>
+        <div>
+          <%= f.label :bath, t(".bath") %>
+          <%= f.number_field :bath, min: 1, max: 10, value: "1", oninput: "this.value=(parseInt(this.value))" %>
+          <%= f.field_errors :bath %>
+        </div>
+        <div>
+          <%= f.label :parking, t(".parking") %>
+          <%= f.number_field :parking, min: 0, max: 5, value: "1", oninput: "this.value=(parseInt(this.value))" %>
+          <%= f.field_errors :parking %>
+        </div>
+        <div>
+          <%= f.label :plot_size, t(".plot_size") %>
+          <%= f.number_field :plot_size, min: 1 %>
+          <%= f.field_errors :plot_size %>
+        </div>
+        <div>
+          <%= f.label :floor_size, t(".floor_size") %>
+          <%= f.number_field :floor_size, min: 1 %>
+          <%= f.field_errors :floor_size %>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <div>
+          <%= f.label :autocomplete, t(".address") %>
+          <%= f.text_field :autocomplete, placeholder: t(".start_typing"), value: @form.property_address,
+            data: {
+              action: "focus->google-places-autocomplete#geolocate",
+              google_places_autocomplete_target: "autoComplete"
+            }
+          %>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-x-2 text-xs text-gray-500 mt-2">
+        <span><%= t(".manually_fill_address") %></span>
+        <%= render Ui::ToggleSwitchComponent.new %>
+      </div>
+      <div class="mt-8 space-y-8 hidden" data-toggle-switch-target="toggleable"> <!-- hide on load-->
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <%= f.label :address, t(".street_address") %>
+            <%= f.text_field :address, data: { google_places_autocomplete_target: "streetAddress" } %>
+            <%= f.field_errors :address %>
+          </div>
+          <div>
+            <%= f.label :suburb, t(".suburb") %>
+            <%= f.text_field :suburb, data: { google_places_autocomplete_target: "suburb" } %>
+            <%= f.field_errors :suburb %>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-8">
+          <div class="mt-6">
+            <%= f.label :subdivision, t(".subdivision") %>
+            <%= f.select :subdivision, @form.subdivision_options,
+              {prompt: t(".select_state")},
+              data: {google_places_autocomplete_target: "subdivision"}
+            %>
+            <%= f.field_errors :subdivision %>
+          </div>
+          <div class="mt-6">
+            <%= f.label :country_code, t(".country") %>
+            <%= f.select :country_code, @form.supported_countries_options,
+              {prompt: t(".select_country")},
+              data: {google_places_autocomplete_target: "country"}
+            %>
+            <%= f.field_errors :country_code %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

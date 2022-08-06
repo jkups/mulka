@@ -15,7 +15,7 @@ module Calculator
 
       class << self
         def group_by_property(tranzactions:, portfolio:)
-          grouped_tranzactions = tranzactions.order(created_at: :desc).group_by(&:offer_id)
+          grouped_tranzactions = tranzactions.group_by(&:offer)
           portfolio_property_count = grouped_tranzactions.size
           calculate_totals = calculate_totals(tranzactions)
 
@@ -46,22 +46,22 @@ module Calculator
       end
 
       def prepared_tranzactions
-        grouped_tranzactions.map { |offer_id, tranzactions| prepare_tranzactions(offer_id, tranzactions) }
+        grouped_tranzactions.map { |offer, tranzactions| prepare_tranzactions(offer, tranzactions) }
       end
 
       private
 
       attr_reader :grouped_tranzactions
 
-      def prepare_tranzactions(offer_id, tranzactions)
-        offer = Queries::BuyerApp::Offers::FindById.perform(offer_id: offer_id)
+      def prepare_tranzactions(offer, tranzactions)
+        first_property_image = offer.property.images.split(",").first
 
         TrxnSummary.new(
           offer_id: offer.id,
           portfolio_id: portfolio.id,
           property_id: offer.property_id,
           property_name: offer.property.name,
-          property_image: offer.property.images.first,
+          property_image: first_property_image,
           entries: tranzactions,
           **prepare_subtotals(tranzactions)
         )

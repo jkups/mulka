@@ -164,6 +164,8 @@ module Forms
             organization: organization
           )
         end
+
+        def property_address = nil
       end
     end
   end

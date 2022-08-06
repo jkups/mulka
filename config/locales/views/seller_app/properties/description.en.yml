@@ -1,0 +1,7 @@
+en:
+  seller_app:
+    properties:
+      description:
+        property_description: Description
+        description_paragraph: There's nothing like over selling. Here's your opportunity to provide more details about your property and why it's a good investment choice. Do not hold back!
+        start_here: Start here...

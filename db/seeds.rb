@@ -220,7 +220,7 @@ eoi_property = Properties::Property.create!(
   subdivision: "NSW",
   country_code: "AU",
   description: Faker::Restaurant.description,
-  images: "jlsvt4sms9ymprcrljjy",
+  images: "jlsvt4sms9ymprcrljjy,gkjnuyskk7dctedu8odl,jlsvt4sms9ymprcrljjy",
   occupied: false,
   category: Properties::Property::CATEGORIES.fetch(:house),
   classification: Properties::Property::CLASSIFICATIONS.fetch(:newly_built),

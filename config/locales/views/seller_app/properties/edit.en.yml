@@ -1,0 +1,6 @@
+en:
+  seller_app:
+    properties:
+      edit:
+        update_property_heading: Update Property
+        update_property: Update Property

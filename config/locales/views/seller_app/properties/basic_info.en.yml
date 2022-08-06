@@ -1,0 +1,25 @@
+en:
+  seller_app:
+    properties:
+      basic_info:
+        property_basic_info: Basic Information
+        name: Property Name
+        category: Category
+        classification: Classification
+        occupied: Curretly Occupied?
+        bed: Number of Beds
+        bath: Number of Baths
+        parking: Number of Car Park
+        plot_size: Plot Size
+        floor_size: Floor Size
+        select_category: Select a category
+        select_option: Select an option
+        manually_fill_address: Manually fill out the address
+        basic_info_paragraph: Here is where you provide your property's basic information. You should also give your property a unique name to be listed as.
+        address: Physical Address
+        street_address: Street Address
+        country: Country
+        subdivision: State
+        select_country: Select country
+        select_state: Select state
+        start_typing: Start typing the address
